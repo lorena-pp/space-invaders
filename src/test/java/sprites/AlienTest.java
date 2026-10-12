@@ -1,4 +1,4 @@
-package space_invaders.sprites;
+package sprites;
 
 import org.junit.Test;
 
