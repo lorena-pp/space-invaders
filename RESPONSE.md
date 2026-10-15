@@ -106,14 +106,12 @@ puedan plantear clases de equivalencia y utilizar la teoría de valores límite 
 clases. De esta manera, se podrían establecer al menos 2 casos de prueba por cada clase de equivalencia (nominal y
 extremo interior).
 
-También podría considerarse otra postura, donde los valores que no pertenecen a los límites definidos por el tablero se
-tomen como inválidos, y, por tanto, podría justificarse un enfoque mediante *(Weak-)Robust-BVT*.
-
 #### Especificación para la clase Alien
 
 Los enemigos, por la naturaleza del juego, van desplazándose en el eje vertical hacia la parte inferior de la pantalla
 de manera progresiva, amenazando el avance del jugador en la partida. Cuando un enemigo alcanza un límite en dicho eje,
-la partida termina. Este límite se establece sobre el tablero, por lo que "recorta" el espacio útil para los enemigos en
+la partida termina, por lo que suena coherente que los enemigos no puedan navegar libremente a partir de dicho punto.
+Este límite se establece sobre el tablero, por lo que "recorta" sobre este el espacio navegable para los enemigos en
 particular. Por este motivo, se requiere plantear para ellos un Análisis de Casos Especiales para inicializaciones que
 traten de colocar directamente un enemigo en la zona restringida (GROUND < Y < BOARD_HEIGHT). Esto podría ser
 equivalente a considerar una clase de equivalencia más, que en este caso sí sería inválida.
