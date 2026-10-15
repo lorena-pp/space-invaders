@@ -2,7 +2,6 @@ package space_invaders.sprites;
 
 import main.Commons;
 import org.junit.Test;
-import space_invaders.sprites.Alien;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

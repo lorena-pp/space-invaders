@@ -3,7 +3,6 @@ package space_invaders.sprites;
 import main.Board;
 import main.Commons;
 import org.junit.Test;
-import space_invaders.sprites.Player;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
