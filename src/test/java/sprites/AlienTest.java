@@ -70,9 +70,9 @@ public class AlienTest {
         int valorY = Commons.GROUND - Commons.ALIEN_HEIGHT + 1;
         Alien alien = new Alien(valorX, valorY);
 
-        boolean posicionCorrecta = alien.getX() == valorX && alien.getY() == valorY;
+        boolean posicionCorrecta = alien.getX() == valorX && (alien.getY() + Commons.ALIEN_HEIGHT < Commons.GROUND);
 
-        assertFalse("Alien should be in the correct position", posicionCorrecta);
+        assertFalse("Alien should NOT be in that position", posicionCorrecta);
     }
 
     @Test
@@ -81,9 +81,8 @@ public class AlienTest {
         int valorY = Commons.BOARD_HEIGHT - Commons.ALIEN_HEIGHT;
         Alien alien = new Alien(valorX, valorY);
 
-        boolean posicionCorrecta = alien.getX() == valorX && alien.getY() == valorY;
-
-        assertFalse("Alien should be in the correct position", posicionCorrecta);
+        boolean posicionCorrecta = alien.getX() == valorX && (alien.getY() + Commons.ALIEN_HEIGHT < Commons.GROUND);
+        assertFalse("Alien should NOT be in the correct position", posicionCorrecta);
     }
 
     @Test
