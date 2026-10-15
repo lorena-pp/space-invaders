@@ -109,7 +109,7 @@ public class ShotTest {
     }
 
     @Test
-    public void BVT_creacionAShot_xMaximoMenos_yNominal() {
+    public void BVT_creacionShot_xMaximoMenos_yNominal() {
         int valor_x = Commons.BOARD_WIDTH - 1;
         int valor_y = Commons.BOARD_HEIGHT/2;
 
