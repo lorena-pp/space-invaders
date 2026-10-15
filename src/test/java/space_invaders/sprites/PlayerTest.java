@@ -1,4 +1,4 @@
-package sprites;
+package space_invaders.sprites;
 
 import main.Board;
 import main.Commons;
