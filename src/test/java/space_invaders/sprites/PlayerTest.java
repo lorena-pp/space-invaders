@@ -41,7 +41,7 @@ public class PlayerTest {
 
         boolean posicionActualizada = player.getX() == valorX + valorDX;
 
-        assertTrue("Player should be moved to the left", posicionActualizada);
+        assertTrue(posicionActualizada, "Player should be moved to the left");
     }
 
     @Test
@@ -57,7 +57,7 @@ public class PlayerTest {
 
         boolean posicionActualizada = player.getX() == LEFT_X_CORNER;
 
-        assertTrue("Player should stay in the left corner", posicionActualizada);
+        assertTrue(posicionActualizada, "Player should stay in the left corner");
     }
 
     @Test
@@ -73,7 +73,7 @@ public class PlayerTest {
 
         boolean posicionActualizada = player.getX() == valorX + valorDX;
 
-        assertTrue("Player should not be moved", posicionActualizada);
+        assertTrue(posicionActualizada, "Player should not be moved");
     }
 
     @Test
@@ -89,7 +89,7 @@ public class PlayerTest {
 
         boolean posicionActualizada = player.getX() == valorX + valorDX;
 
-        assertTrue("Player should move to the right", posicionActualizada);
+        assertTrue(posicionActualizada, "Player should move to the right");
     }
 
     @Test
@@ -105,7 +105,7 @@ public class PlayerTest {
 
         boolean posicionActualizada = player.getX() == RIGHT_X_CORNER;
 
-        assertTrue("Player should stay in the right corner", posicionActualizada);
+        assertTrue(posicionActualizada, "Player should stay in the right corner");
     }
 
     @Test
