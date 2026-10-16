@@ -1,13 +1,13 @@
 package main;
-import org.junit.Test;
-import static org.junit.Assert.assertNotNull;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardTest {
 
     @Test
-    public void creacionBoardTest() {
+    void creacionBoardTest() {
         Board board = new Board();
 
-        assertNotNull("Board should be created successfully", board);
+        assertNotNull(board, "Board should be created successfully");
     }
 }
