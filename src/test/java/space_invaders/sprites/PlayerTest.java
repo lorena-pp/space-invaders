@@ -12,6 +12,7 @@ public class PlayerTest {
 
     int LEFT_X_CORNER = 0;
     int RIGHT_X_CORNER = Commons.BOARD_WIDTH;
+
     int MOV_IZQUIERDA = -2;
     int MOV_DERECHA = 2;
     int SIN_MOV = 0;
