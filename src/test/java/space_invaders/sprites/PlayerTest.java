@@ -11,6 +11,12 @@ import static org.junit.Assert.assertTrue;
 
 public class PlayerTest {
 
+    int LEFT_X_CORNER = 0;
+    int RIGHT_X_CORNER = Commons.BOARD_WIDTH;
+    int MOV_IZQUIERDA = -2;
+    int MOV_DERECHA = 2;
+    int SIN_MOV = 0;
+
     @Test
     public void CE_creacionPlayerPosicionCorrecta_valoresNominales() {
         int valorX = Commons.BOARD_WIDTH/2;
@@ -22,7 +28,85 @@ public class PlayerTest {
         assertTrue("Player should be in the correct position", posicionCorrecta);
     }
 
+    @Test
+    public void TD_movIzq_zonaCentro() {
+        int valorDX = MOV_IZQUIERDA;
+        int valorX = RIGHT_X_CORNER/2;
 
+        Player player = new Player();
+        player.setX(valorX);
+        player.dx = valorDX;
+
+        player.act();
+
+        boolean posicionActualizada = player.getX() == valorX + valorDX;
+
+        assertTrue("Player should be moved to the left", posicionActualizada);
+    }
+
+    @Test
+    public void TD_movIzq_choqueIzquierdo() {
+        int valorDX = MOV_IZQUIERDA;
+        int valorX = LEFT_X_CORNER;
+
+        Player player = new Player();
+        player.setX(valorX);
+        player.dx = valorDX;
+
+        player.act();
+
+        boolean posicionActualizada = player.getX() == LEFT_X_CORNER;
+
+        assertTrue("Player should stay in the left corner", posicionActualizada);
+    }
+
+    @Test
+    public void TD_sinMov_noSeMueve() {
+        int valorDX = SIN_MOV;
+        int valorX = RIGHT_X_CORNER/2;
+
+        Player player = new Player();
+        player.setX(valorX);
+        player.dx = valorDX;
+
+        player.act();
+
+        boolean posicionActualizada = player.getX() == valorX + valorDX;
+
+        assertTrue("Player should not be moved", posicionActualizada);
+    }
+
+    @Test
+    public void TD_movDer_zonaCentro() {
+        int valorDX = MOV_DERECHA;
+        int valorX = RIGHT_X_CORNER/2;
+
+        Player player = new Player();
+        player.setX(valorX);
+        player.dx = valorDX;
+
+        player.act();
+
+        boolean posicionActualizada = player.getX() == valorX + valorDX;
+
+        assertTrue("Player should move to the right", posicionActualizada);
+    }
+
+    @Test
+    public void TD_movDer_choqueDerecho() {
+        int valorDX = MOV_DERECHA;
+        int valorX = RIGHT_X_CORNER;
+
+        Player player = new Player();
+        player.setX(valorX);
+        player.dx = valorDX;
+
+        player.act();
+
+        boolean posicionActualizada = player.getX() == RIGHT_X_CORNER;
+
+        assertTrue("Player should stay in the right corner", posicionActualizada);
+    }
 
     @Test
     public void BVT_keyPressedDerecha_valoresNominales() {
