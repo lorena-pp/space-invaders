@@ -193,4 +193,69 @@ public class AlienTest {
         return outInX && outGround;
     }
 
+    @Test
+    public void TD_AlienNoSeMueve() {
+        int valorX = Commons.ALIEN_INIT_X;
+        int valorY = Commons.ALIEN_INIT_Y;
+        int direccion = 0;
+
+        Alien alien = new Alien(valorX, valorY);
+        alien.act(direccion);
+
+        boolean posicionCorrecta = alien.getX() == valorX;
+        assertTrue(posicionCorrecta, "Alien no se mueve");
+    }
+
+    @Test
+    public void TD_AlienSeMueveIzquierda() {
+        int valorX = Commons.ALIEN_INIT_X;
+        int valorY = Commons.ALIEN_INIT_Y;
+        int direccion = -2;
+
+        Alien alien = new Alien(valorX, valorY);
+        alien.act(direccion);
+
+        boolean posicionCorrecta = alien.getX() == valorX-2;
+        assertTrue(posicionCorrecta, "Alien se mueve a la izquierda");
+    }
+
+    @Test
+    public void TD_AlienNoSeMueveIzquierda() {
+        int valorX = 0;
+        int valorY = Commons.ALIEN_INIT_Y;
+        int direccion = -2;
+
+        Alien alien = new Alien(valorX, valorY);
+        alien.act(direccion);
+
+        boolean posicionCorrecta = alien.getX() == valorX;
+        assertTrue(posicionCorrecta, "Alien no se mueve");
+    }
+
+    @Test
+    public void TD_AlienSeMueveDerecha() {
+        int valorX = Commons.ALIEN_INIT_X;
+        int valorY = Commons.ALIEN_INIT_Y;
+        int direccion = 2;
+
+        Alien alien = new Alien(valorX, valorY);
+        alien.act(direccion);
+
+        boolean posicionCorrecta = alien.getX() == valorX+2;
+        assertTrue(posicionCorrecta, "Alien se mueve a la  derecha");
+    }
+
+    @Test
+    public void TD_AlienNoSeMueveDerecha() {
+        int valorX = Commons.BOARD_WIDTH - Commons.ALIEN_WIDTH;
+        int valorY = Commons.ALIEN_INIT_Y;
+        int direccion = 2;
+
+        Alien alien = new Alien(valorX, valorY);
+        alien.act(direccion);
+
+        boolean posicionCorrecta = alien.getX() == valorX;
+        assertTrue(posicionCorrecta, "Alien no se mueve");
+    }
+
 }
