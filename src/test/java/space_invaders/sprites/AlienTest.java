@@ -1,197 +1,91 @@
 package space_invaders.sprites;
 
-import main.Commons;
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import main.Commons;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AlienTest {
 
-    @Test
-    void CreacionAlien_CP1_ValoresNominales() {
-        int valorX = Commons.ALIEN_INIT_X;
-        int valorY = Commons.ALIEN_INIT_Y;
+    private static final int X_MIN = Commons.BORDER_LEFT;
+    private static final int X_MIN_MENOS = X_MIN - 1;
+    private static final int X_MIN_MAS = X_MIN + 1;
+    private static final int X_NOMINAL = Commons.ALIEN_INIT_X;
+    private static final int X_MAX = Commons.BOARD_WIDTH - Commons.BORDER_RIGHT;
+    private static final int X_MAX_MENOS = X_MAX - 1;
+    private static final int X_MAX_MAS = X_MAX + 1;
 
-        Alien alien = new Alien(valorX, valorY);
+    private static final int Y_MIN = 0;
+    private static final int Y_MIN_MENOS = Y_MIN - 1;
+    private static final int Y_MIN_MAS = Y_MIN + 1;
+    private static final int Y_NOMINAL = Commons.ALIEN_INIT_Y;
+    private static final int Y_MAX = Commons.GROUND;
+    private static final int Y_MAX_MENOS = Y_MAX - 1;
+    private static final int Y_MAX_MAS = Y_MAX + 1;
 
-        boolean asignacionCorrecta = alien.getX() == valorX && alien.getY() == valorY;
-        boolean posicionCorrecta = esPosicionValida(alien.getX(), alien.getY());
+    static Stream<Arguments> validAssignmentsProvider() {
+        return Stream.of(
+                Arguments.of(X_NOMINAL, Y_NOMINAL),
 
-        assertTrue(asignacionCorrecta, "Alien should be in the assigned position");
-        assertTrue(posicionCorrecta, "Alien position should be correct");
+                Arguments.of(X_NOMINAL, Y_MIN),
+                Arguments.of(X_NOMINAL, Y_MIN_MAS),
+                Arguments.of(X_NOMINAL, Y_MAX_MENOS),
+                Arguments.of(X_NOMINAL, Y_MAX),
+
+                Arguments.of(X_MIN, Y_NOMINAL),
+                Arguments.of(X_MIN_MAS, Y_NOMINAL),
+                Arguments.of(X_MAX_MENOS, Y_NOMINAL),
+                Arguments.of(X_MAX, Y_NOMINAL)
+        );
     }
 
-    @Test
-    void CreacionAlien_CP2_xNominal_yMinimoMenos() {
-        int valorX = Commons.ALIEN_INIT_X;
-        int valorY = -1;
-        Alien alien = new Alien(valorX, valorY);
+    static Stream<Arguments> invalidAssignmentsProvider() {
+        return Stream.of(
+                Arguments.of(X_NOMINAL, Y_MIN_MENOS, X_NOMINAL, Y_MIN),
+                Arguments.of(X_NOMINAL, Y_MAX_MAS, X_NOMINAL, Y_MAX),
 
-        boolean asignacionCorrecta = alien.getX() == valorX && alien.getY() == valorY;
-        boolean posicionCorrecta = esPosicionValida(alien.getX(), alien.getY());
+                Arguments.of(X_MIN_MENOS, Y_NOMINAL, X_MIN, Y_NOMINAL),
+                Arguments.of(X_MAX_MAS, Y_NOMINAL, X_MAX, Y_NOMINAL)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("validAssignmentsProvider")
+    void CreacionAlien_AsignacionCorrecta(int x, int y){
+        Alien alien = new Alien(x, y);
+
+        boolean asignacionCorrecta = alien.getX() == x && alien.getY() == y;
+        boolean posicionValida = esPosicionValida(x, y);
+
+        assertTrue(asignacionCorrecta, "Alien should be in the assigned position");
+        assertTrue(posicionValida, "Alien's actual position should be valid");
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalidAssignmentsProvider")
+    void CreacionAlien_AsignacionIncorrecta(int assignedX, int assignedY, int expectedX, int expectedY){
+        Alien alien = new Alien(assignedX, assignedY);
+
+        boolean asignacionCorrecta = alien.getX() == assignedX && alien.getY() == assignedY;
+        boolean posicionCorrectaYEsperada = esPosicionValida(alien.getX(), alien.getY()) && alien.getX() == expectedX && alien.getY() == expectedY;
 
         assertFalse(asignacionCorrecta, "Alien should NOT be in the assigned position");
-        assertTrue(posicionCorrecta, "Alien position should be correct");
+        assertTrue(posicionCorrectaYEsperada, "Alien position should be correct");
     }
 
-    @Test
-    void CreacionAlien_CP2_xNominal_yMinimo() {
-        int valorX = Commons.ALIEN_INIT_X;
-        int valorY = 0;
-        Alien alien = new Alien(valorX, valorY);
+    private static boolean esPosicionValida(int x, int y){
+        boolean ejeXCorrecto = x >= X_MIN && x <= X_MAX;
+        boolean ejeYCorrecto = y >= Y_MIN && y <= Y_MAX;
 
-        boolean asignacionCorrecta = alien.getX() == valorX && alien.getY() == valorY;
-        boolean posicionCorrecta = esPosicionValida(alien.getX(), alien.getY());
-
-        assertTrue(asignacionCorrecta, "Alien should be in the assigned position");
-        assertTrue(posicionCorrecta, "Alien position should be correct");
+        return ejeXCorrecto && ejeYCorrecto;
     }
 
-    @Test
-    void CreacionAlien_CP3_xNominal_yMinimoPlus() {
-        int valorX = Commons.ALIEN_INIT_X;
-        int valorY = 1;
-        Alien alien = new Alien(valorX, valorY);
-
-        boolean asignacionCorrecta = alien.getX() == valorX && alien.getY() == valorY;
-        boolean posicionCorrecta = esPosicionValida(alien.getX(), alien.getY());
-
-        assertTrue(asignacionCorrecta, "Alien should be in the assigned position");
-        assertTrue(posicionCorrecta, "Alien position should be correct");
-    }
-
-    @Test
-    void CreacionAlien_CP4_xNominal_yGroundMenos() {
-        int valorX = Commons.ALIEN_INIT_X;
-        int valorY = Commons.GROUND - Commons.ALIEN_HEIGHT - 1;
-        Alien alien = new Alien(valorX, valorY);
-
-        boolean asignacionCorrecta = alien.getX() == valorX && alien.getY() == valorY;
-        boolean posicionCorrecta = esPosicionValida(alien.getX(), alien.getY());
-
-        assertTrue(asignacionCorrecta, "Alien should be in the assigned position");
-        assertTrue(posicionCorrecta, "Alien position should be correct");
-    }
-
-    @Test
-    void CreacionAlien_CP4_xNominal_yGround() {
-        int valorX = Commons.ALIEN_INIT_X;
-
-        // Asignación incorrecta: el enemigo ha alcanzado el Ground
-        int valorY = Commons.GROUND - Commons.ALIEN_HEIGHT;
-
-        Alien alien = new Alien(valorX, valorY);
-
-        boolean asignacionCorrecta = alien.getX() == valorX && alien.getY() == valorY;
-        boolean posicionCorrecta = esPosicionValida(alien.getX(), alien.getY());
-
-        assertFalse(asignacionCorrecta, "Alien should NOT be in the assigned position");
-        assertTrue(posicionCorrecta, "Alien position should be correct");
-    }
-
-    @Test
-    void CreacionAlien_CP4_xNominal_yGroundPlus() {
-        int valorX = Commons.ALIEN_INIT_X;
-
-        // Asignación incorrecta: el enemigo ha alcanzado el Ground
-        int valorY = Commons.GROUND - Commons.ALIEN_HEIGHT + 1;
-
-        Alien alien = new Alien(valorX, valorY);
-
-        boolean asignacionCorrecta = alien.getX() == valorX && alien.getY() == valorY;
-        boolean posicionCorrecta = esPosicionValida(alien.getX(), alien.getY());
-
-        assertFalse(asignacionCorrecta, "Alien should NOT be in the assigned position");
-        assertTrue(posicionCorrecta, "Alien position should be correct");
-    }
-
-    @Test
-    void CreacionAlien_CP6_xMinimoMenos_yNominal() {
-        int valorX = -1;
-        int valorY = Commons.ALIEN_INIT_Y;
-
-        Alien alien = new Alien(valorX, valorY);
-        boolean asignacionCorrecta = alien.getX() == valorX && alien.getY() == valorY;
-        boolean posicionCorrecta = esPosicionValida(alien.getX(), alien.getY());
-
-        assertFalse(asignacionCorrecta, "Alien should NOT be in the assigned position");
-        assertTrue(posicionCorrecta, "Alien position should be correct");
-    }
-
-    @Test
-    void CreacionAlien_CP6_xMinimo_yNominal() {
-        int valorX = 0;
-        int valorY = Commons.ALIEN_INIT_Y;
-
-        Alien alien = new Alien(valorX, valorY);
-        boolean asignacionCorrecta = alien.getX() == valorX && alien.getY() == valorY;
-        boolean posicionCorrecta = esPosicionValida(alien.getX(), alien.getY());
-
-        assertTrue(asignacionCorrecta, "Alien should be in the assigned position");
-        assertTrue(posicionCorrecta, "Alien position should be correct");
-    }
-
-    @Test
-    void CreacionAlien_CP7_xMinimoPlus_yNominal() {
-        int valorX = 1;
-        int valorY = Commons.ALIEN_INIT_Y;
-
-        Alien alien = new Alien(valorX, valorY);
-
-        boolean asignacionCorrecta = alien.getX() == valorX && alien.getY() == valorY;
-        boolean posicionCorrecta = esPosicionValida(alien.getX(), alien.getY());
-
-        assertTrue(asignacionCorrecta, "Alien should be in the assigned position");
-        assertTrue(posicionCorrecta, "Alien position should be correct");
-    }
-
-    @Test
-    void CreacionAlien_CP8_xMaximoMenos_yNominal() {
-        int valorX = Commons.BOARD_WIDTH - Commons.ALIEN_WIDTH - 1;
-        int valorY = Commons.ALIEN_INIT_Y;
-
-        Alien alien = new Alien(valorX, valorY);
-
-        boolean asignacionCorrecta = alien.getX() == valorX && alien.getY() == valorY;
-        boolean posicionCorrecta = esPosicionValida(alien.getX(), alien.getY());
-
-        assertTrue(asignacionCorrecta, "Alien should be in the assigned position");
-        assertTrue(posicionCorrecta, "Alien position should be correct");
-    }
-
-    @Test
-    void CreacionAlien_CP9_xMaximo_yNominal() {
-        int valorX = Commons.BOARD_WIDTH - Commons.ALIEN_WIDTH;
-        int valorY = Commons.ALIEN_INIT_Y;
-
-        Alien alien = new Alien(valorX, valorY);
-
-        boolean asignacionCorrecta = alien.getX() == valorX && alien.getY() == valorY;
-        boolean posicionCorrecta = esPosicionValida(alien.getX(), alien.getY());
-
-        assertTrue(asignacionCorrecta, "Alien should be in the assigned position");
-        assertTrue(posicionCorrecta, "Alien position should be correct");
-    }
-
-    @Test
-    void CreacionAlien_CP9_xMaximoPlus_yNominal() {
-        int valorX = Commons.BOARD_WIDTH - Commons.ALIEN_WIDTH + 1;
-        int valorY = Commons.ALIEN_INIT_Y;
-
-        Alien alien = new Alien(valorX, valorY);
-
-        boolean asignacionCorrecta = alien.getX() == valorX && alien.getY() == valorY;
-        boolean posicionCorrecta = esPosicionValida(alien.getX(), alien.getY());
-
-        assertFalse(asignacionCorrecta, "Alien should NOT be in the assigned position");
-        assertTrue(posicionCorrecta, "Alien position should be correct");
-    }
-
-    private boolean esPosicionValida(int x, int y){
-        boolean outInX = (x - Commons.ALIEN_WIDTH) <= Commons.BOARD_WIDTH;
-        boolean outGround = (y - Commons.ALIEN_HEIGHT) < Commons.BOARD_HEIGHT;
-        return outInX && outGround;
-    }
 
     @Test
     public void TD_AlienNoSeMueve() {
