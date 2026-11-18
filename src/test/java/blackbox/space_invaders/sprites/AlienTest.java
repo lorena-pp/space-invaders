@@ -1,4 +1,4 @@
-package space_invaders.sprites;
+package blackbox.space_invaders.sprites;
 
 import java.util.stream.Stream;
 
@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import main.Commons;
+import space_invaders.sprites.Alien;
 
 import static org.junit.jupiter.api.Assertions.*;
 

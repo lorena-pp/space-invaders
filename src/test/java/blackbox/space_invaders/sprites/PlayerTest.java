@@ -1,8 +1,9 @@
-package space_invaders.sprites;
+package blackbox.space_invaders.sprites;
 
 import main.Board;
 import main.Commons;
 import org.junit.jupiter.api.Test;
+import space_invaders.sprites.Player;
 
 import java.awt.event.KeyEvent;
 

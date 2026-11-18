@@ -1,4 +1,4 @@
-package main;
+package blackbox.main;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
