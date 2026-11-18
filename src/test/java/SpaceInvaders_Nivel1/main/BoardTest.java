@@ -1,5 +1,7 @@
-package blackbox.main;
+package SpaceInvaders_Nivel1.main;
 
+import main.Board;
+import main.Commons;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

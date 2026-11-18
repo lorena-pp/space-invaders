@@ -1,4 +1,4 @@
-package blackbox.space_invaders.sprites;
+package SpaceInvaders_Nivel1.space_invaders.sprites;
 
 import java.util.stream.Stream;
 
