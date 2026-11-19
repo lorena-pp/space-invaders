@@ -1,4 +1,4 @@
-package SpaceInvaders_Nivel1.main;
+package main;
 
 import main.Board;
 import main.Commons;
