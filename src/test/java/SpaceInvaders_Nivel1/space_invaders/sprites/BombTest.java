@@ -1,7 +1,8 @@
-package space_invaders.sprites;
+package SpaceInvaders_Nivel1.space_invaders.sprites;
 
 import main.Commons;
 import org.junit.jupiter.api.Test;
+import space_invaders.sprites.Alien;
 
 import static org.junit.jupiter.api.Assertions.*;
 
