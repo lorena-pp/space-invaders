@@ -79,8 +79,8 @@ public class BoardTest {
     }
 
     // ==============================================================================
-    // 3. TESTS PARAMETRIZADOS: update() -> Condición de victoria (BVT)
-    // ==============================================================================
+// 3. TESTS PARAMETRIZADOS: update() -> Condición de victoria (BVT)
+// ==============================================================================
     @Nested
     public class UpdateVictoryParameterizedTest {
 
@@ -98,25 +98,18 @@ public class BoardTest {
         public void BVT_update_condicionDeVictoria(int offset, boolean expectedInGame, String expectedMessage) throws Exception {
             Board board = new Board();
 
-            Field inGameField = Board.class.getDeclaredField("inGame");
-            inGameField.setAccessible(true);
-            inGameField.set(board, true);
+            board.setInGame(true);
+            board.setMessage("");
 
-            Field messageField = Board.class.getDeclaredField("message");
-            messageField.setAccessible(true);
-            messageField.set(board, "");
-
-            Field deathsField = Board.class.getDeclaredField("deaths");
-            deathsField.setAccessible(true);
             int targetDeaths = Commons.NUMBER_OF_ALIENS_TO_DESTROY + offset;
-            deathsField.set(board, Math.max(0, targetDeaths));
+            board.setDeaths(Math.max(0, targetDeaths));
 
             Method updateMethod = Board.class.getDeclaredMethod("update");
             updateMethod.setAccessible(true);
             updateMethod.invoke(board);
 
-            boolean actualInGame = (boolean) inGameField.get(board);
-            String actualMessage = (String) messageField.get(board);
+            boolean actualInGame = board.isInGame();
+            String actualMessage = board.getMessage();
 
             assertEquals(expectedInGame, actualInGame, "La bandera inGame no es la esperada");
             if (!expectedInGame) {
@@ -126,8 +119,8 @@ public class BoardTest {
     }
 
     // ==============================================================================
-    // 4. TESTS PARAMETRIZADOS: update_aliens() -> Movimiento y bordes (BVT)
-    // ==============================================================================
+// 4. TESTS PARAMETRIZADOS: update_aliens() -> Movimiento y bordes (BVT)
+// ==============================================================================
     @Nested
     public class UpdateAliensParameterizedTest {
 
@@ -155,29 +148,18 @@ public class BoardTest {
             Alien testAlien = new Alien(startX, startY);
             aliens.add(testAlien);
 
-            Field aliensField = Board.class.getDeclaredField("aliens");
-            aliensField.setAccessible(true);
-            aliensField.set(board, aliens);
-
-            Field directionField = Board.class.getDeclaredField("direction");
-            directionField.setAccessible(true);
-            directionField.set(board, initialDirection);
-
-            Field inGameField = Board.class.getDeclaredField("inGame");
-            inGameField.setAccessible(true);
-            inGameField.set(board, true);
-
-            Field messageField = Board.class.getDeclaredField("message");
-            messageField.setAccessible(true);
-            messageField.set(board, "");
+            board.setAliens(aliens);
+            board.setDirection(initialDirection);
+            board.setInGame(true);
+            board.setMessage("");
 
             Method updateAliensMethod = Board.class.getDeclaredMethod("update_aliens");
             updateAliensMethod.setAccessible(true);
             updateAliensMethod.invoke(board);
 
-            int actualDirection = (int) directionField.get(board);
-            boolean actualInGame = (boolean) inGameField.get(board);
-            String actualMessage = (String) messageField.get(board);
+            int actualDirection = board.getDirection();
+            boolean actualInGame = board.isInGame();
+            String actualMessage = board.getMessage();
 
             assertEquals(expectedDirection, actualDirection, "La dirección de la formación no es la esperada");
             assertEquals(expectedInGame, actualInGame, "La bandera inGame no es la correcta tras procesar el límite");
@@ -194,8 +176,8 @@ public class BoardTest {
     }
 
     // ==============================================================================
-    // 5. TESTS PARAMETRIZADOS: update_bomb() -> Movimiento y Colisiones (Decision Tables + BVT)
-    // ==============================================================================
+// 5. TESTS PARAMETRIZADOS: update_bomb() -> Movimiento y Colisiones (Decision Tables + BVT)
+// ==============================================================================
     @Nested
     public class UpdateBombParameterizedTest {
 
@@ -227,25 +209,18 @@ public class BoardTest {
             player.setX(playerX);
             player.setY(playerY);
             player.setDying(false);
-
-            Field playerField = Board.class.getDeclaredField("player");
-            playerField.setAccessible(true);
-            playerField.set(board, player);
+            board.setPlayer(player);
 
             // 2. Configurar Alien y su Bomba interna
             Alien alien = new Alien(bombStartX, bombStartY);
-            Alien.Bomb bomb = alien.new Bomb(bombStartX, bombStartY);
+            Alien.Bomb bomb = alien.getBomb();
+            bomb.setX(bombStartX);
+            bomb.setY(bombStartY);
             bomb.setDestroyed(false);
-
-            Field bombField = Alien.class.getDeclaredField("bomb");
-            bombField.setAccessible(true);
-            bombField.set(alien, bomb);
 
             List<Alien> aliens = new ArrayList<>();
             aliens.add(alien);
-            Field aliensField = Board.class.getDeclaredField("aliens");
-            aliensField.setAccessible(true);
-            aliensField.set(board, aliens);
+            board.setAliens(aliens);
 
             // 3. Ejecutar update_bomb()
             Method updateBombMethod = Board.class.getDeclaredMethod("update_bomb");
@@ -268,8 +243,8 @@ public class BoardTest {
     }
 
     // ==============================================================================
-    // 6. TESTS PARAMETRIZADOS: update_shots() -> Movimiento y Colisiones (Decision Tables + BVT)
-    // ==============================================================================
+// 6. TESTS PARAMETRIZADOS: update_shots() -> Movimiento y Colisiones (Decision Tables + BVT)
+// ==============================================================================
     @Nested
     public class UpdateShotsParameterizedTest {
 
@@ -303,26 +278,16 @@ public class BoardTest {
 
             List<Alien> aliens = new ArrayList<>();
             aliens.add(alien);
-            Field aliensField = Board.class.getDeclaredField("aliens");
-            aliensField.setAccessible(true);
-            aliensField.set(board, aliens);
+            board.setAliens(aliens);
 
             // 2. Configurar Disparo (Shot)
             space_invaders.sprites.Shot shot = new space_invaders.sprites.Shot(shotStartX, shotStartY);
             shot.setDying(false);
-
-            Field shotField = Board.class.getDeclaredField("shot");
-            shotField.setAccessible(true);
-            shotField.set(board, shot);
+            board.setShot(shot);
 
             // 3. Configurar Muertes iniciales (Deaths)
-            Field deathsField = Board.class.getDeclaredField("deaths");
-            deathsField.setAccessible(true);
-            deathsField.set(board, 0);
-
-            Field inGameField = Board.class.getDeclaredField("inGame");
-            inGameField.setAccessible(true);
-            inGameField.set(board, true);
+            board.setDeaths(0);
+            board.setInGame(true);
 
             // 4. Ejecutar update_shots()
             Method updateShotsMethod = Board.class.getDeclaredMethod("update_shots");
@@ -330,7 +295,7 @@ public class BoardTest {
             updateShotsMethod.invoke(board);
 
             // 5. Afirmaciones basadas en la Tabla de Decisión
-            int actualDeaths = (int) deathsField.get(board);
+            int actualDeaths = board.getDeaths();
 
             assertEquals(expectedAlienDying, alien.isDying(),
                     "El estado isDying del alien no coincide con la regla de colisión");
