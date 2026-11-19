@@ -1,4 +1,4 @@
-package SpaceInvaders_Nivel2VERSIONPAFU.space_invaders.sprites;
+package space_invaders.sprites;
 
 import main.Board;
 import org.junit.jupiter.api.Test;
@@ -6,9 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.awt.event.KeyEvent;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PlayerTest {/*
+public class PlayerWhiteTest {
 
     @Test
     void keypressedTestCaminoA(){
@@ -56,7 +55,7 @@ public class PlayerTest {/*
         board.getPlayer().keyReleased(keyEvent);
         assertEquals(0, board.getPlayer().dx,"DX debería ser 0 para no moverse");
     }
-*/
+
 }
 
 

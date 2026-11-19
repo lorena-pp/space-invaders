@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PlayerTest {
+public class PlayerBlackTest {
 
     int LEFT_X_CORNER = 0;
     int RIGHT_X_CORNER = Commons.BOARD_WIDTH;

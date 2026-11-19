@@ -1,17 +1,14 @@
-package SpaceInvaders_Nivel2VERSIONPAFU.Main;
+package main;
 
-import main.Board;
-import main.Commons;
 import org.junit.jupiter.api.Test;
 import space_invaders.sprites.Alien;
 
-import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BoardTest {
+public class BoardWhiteTest {
     @Test
     public void updateCaminoA() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         Board testBoard = new Board();

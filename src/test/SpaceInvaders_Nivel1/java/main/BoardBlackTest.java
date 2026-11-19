@@ -1,7 +1,5 @@
 package main;
 
-import main.Board;
-import main.Commons;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,7 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import space_invaders.sprites.Alien;
 import space_invaders.sprites.Player;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +15,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BoardTest {
+public class BoardBlackTest {
 
     // ==============================================================================
     // 1. TESTS ESTÁNDAR (Ejecución única)
