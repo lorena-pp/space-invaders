@@ -394,7 +394,7 @@ public class Board extends JPanel {
      * el juego termina estableciendo el mensaje "Invasion!".</dd></dl>
      */
     private void update_aliens(){
-        for (Alien alien : this.aliens) {
+        for (Alien alien : this.aliens) {   
 
             int x = alien.getX();
 
