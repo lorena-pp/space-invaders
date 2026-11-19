@@ -124,7 +124,7 @@ public class PlayerTest {
     }
 
     @Test
-    void BVT_keyPressedIzquierda_valoresNominales() {
+    void BVT_keyPressedIzquierda_valoresNominales() { //HAY QUE CAMBIAR EL TEST PARA QUE USE EL PLAYER DE BOARD
         int valorInicX = Commons.BOARD_WIDTH/2;
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
