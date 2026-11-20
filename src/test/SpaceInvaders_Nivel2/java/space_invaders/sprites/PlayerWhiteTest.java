@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PlayerWhiteTest {
 
     @Test
-    void keypressedTestCaminoA(){
+    void keypressedTestCaminoA(){ //NO SE HA HECHO NINGÚN CASO DE USO PARA EL NODO 2
         //CAMINO IMPOSIBLE
     }
 

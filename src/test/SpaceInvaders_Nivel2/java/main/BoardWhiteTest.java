@@ -35,8 +35,6 @@ public class BoardWhiteTest {
 
 
 
-
-
     @Test
     public void updateShotsCaminoA() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
@@ -146,5 +144,36 @@ public class BoardWhiteTest {
         );
         //EL DEATHS++ DE AL FINAL DEL METODO DE UPDATE SHOTS DEBERÍA SER THIS.SHOT.DIE()
     }
+
+
+
+
+
+
+/* ERRORES ENCONTRADOS EN UODATE_ALIEN DE PRIMERAS:
+   1 - EN EL SEGUNDO IF, SE HACE UNA COMPROBACION "X != Commons.BORDER_LEFT" CUANDO DEBERÍAS SER <=.
+   2 - EN EL ÚLTIMO IF DEL METODO, SE HACE LA COMPROBACION "y > Commons.GROUND * Commons.ALIEN_HEIGHT"
+        CUANDO ESAS CONSTANTES DEBERÍAN RESTARSE.
+ */
+
+    @Test
+    public void updateAliensCaminoA() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Board testBoard = new Board();
+        int dirInicial = testBoard.getDirection();
+        testBoard.getAliens().clear();
+
+        Method updateMethod = Board.class.getDeclaredMethod("update_aliens");
+        updateMethod.setAccessible(true);
+        updateMethod.invoke(testBoard);
+
+        assertEquals(dirInicial, testBoard.getDirection(), "La dirección ha cambiado de valor");
+    }
+
+    /*
+    EL TEMA CON LOS CAMINOS IMPOSIBLES ES QUE EL FOR DEL PRINCIPIO Y EL WHILE DE DESPUES DE ESE FOR RECORREN LA LISTA DE
+    ALIENS DE BOARD, ENTONCES SI NO ENTRA EN EL FOR, TAMPOCO EN EL WHILE. ADEMÁS, NO TE PODRÍA DEFINIR BIEN CUALES SON LOS CAMINOS
+    IMPOSIBLES QUE GENERAN LOS 2 IFS SECUENCIALES QUE ESTÁN DENTRO DEL FOR
+     */
+
 }
 
