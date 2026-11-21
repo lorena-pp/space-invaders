@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PlayerBlackTest {
 
     public static final int MOV_IZQUIERDA = -2;
-    public int MOV_DERECHA = 2;
-    public int SIN_MOV = 0;
+    public static final int MOV_DERECHA = 2;
+    public static final int SIN_MOV = 0;
 
     @Test
     void CE_creacionPlayerPosicionCorrecta_valoresNominales() {
