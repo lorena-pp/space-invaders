@@ -99,13 +99,6 @@ Los casos de prueba sin ajustar por sprite quedan como sigue:
 | CP4 | 179 | -1  |
 | CP5 | 179 | 351 |
 
-// POR PREGUNTAR
-
-Habría que aclarar si el enfoque de clases de equivalencia y el de valores límite son incompatibles, de forma que se
-puedan plantear clases de equivalencia y utilizar la teoría de valores límite para elegir los candidatos de dichas
-clases. De esta manera, se podrían establecer al menos 2 casos de prueba por cada clase de equivalencia (nominal y
-extremo interior).
-
 #### Especificación para la clase Alien
 
 Los enemigos, por la naturaleza del juego, van desplazándose en el eje vertical hacia la parte inferior de la pantalla
