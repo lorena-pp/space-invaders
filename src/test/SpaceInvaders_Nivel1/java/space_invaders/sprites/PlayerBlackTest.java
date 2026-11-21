@@ -10,9 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PlayerBlackTest {
 
-    int LEFT_X_CORNER = 0;
-    int RIGHT_X_CORNER = Commons.BOARD_WIDTH;
-
     int MOV_IZQUIERDA = -2;
     int MOV_DERECHA = 2;
     int SIN_MOV = 0;
@@ -31,7 +28,7 @@ public class PlayerBlackTest {
     @Test
     public void TD_movIzq_zonaCentro() {
         int valorDX = MOV_IZQUIERDA;
-        int valorX = RIGHT_X_CORNER/2;
+        int valorX = Commons.BOARD_WIDTH/2;
 
         Player player = new Player();
         player.setX(valorX);
@@ -47,7 +44,7 @@ public class PlayerBlackTest {
     @Test
     public void TD_movIzq_choqueIzquierdo() {
         int valorDX = MOV_IZQUIERDA;
-        int valorX = LEFT_X_CORNER;
+        int valorX = AlienTest.X_MIN;
 
         Player player = new Player();
         player.setX(valorX);
@@ -55,7 +52,7 @@ public class PlayerBlackTest {
 
         player.act();
 
-        boolean posicionActualizada = player.getX() == LEFT_X_CORNER;
+        boolean posicionActualizada = player.getX() == AlienTest.X_MIN;
 
         assertTrue(posicionActualizada, "Player should stay in the left corner");
     }
@@ -63,7 +60,7 @@ public class PlayerBlackTest {
     @Test
     public void TD_sinMov_noSeMueve() {
         int valorDX = SIN_MOV;
-        int valorX = RIGHT_X_CORNER/2;
+        int valorX = Commons.BOARD_WIDTH/2;
 
         Player player = new Player();
         player.setX(valorX);
@@ -79,7 +76,7 @@ public class PlayerBlackTest {
     @Test
     public void TD_movDer_zonaCentro() {
         int valorDX = MOV_DERECHA;
-        int valorX = RIGHT_X_CORNER/2;
+        int valorX = Commons.BOARD_WIDTH/2;
 
         Player player = new Player();
         player.setX(valorX);
@@ -95,7 +92,7 @@ public class PlayerBlackTest {
     @Test
     public void TD_movDer_choqueDerecho() {
         int valorDX = MOV_DERECHA;
-        int valorX = RIGHT_X_CORNER;
+        int valorX = AlienTest.X_MAX;
 
         Player player = new Player();
         player.setX(valorX);
@@ -103,7 +100,7 @@ public class PlayerBlackTest {
 
         player.act();
 
-        boolean posicionActualizada = player.getX() == RIGHT_X_CORNER;
+        boolean posicionActualizada = player.getX() == AlienTest.X_MAX;
 
         assertTrue(posicionActualizada, "Player should stay in the right corner");
     }
