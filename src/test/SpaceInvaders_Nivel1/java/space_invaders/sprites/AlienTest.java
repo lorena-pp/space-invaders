@@ -26,7 +26,7 @@ public class AlienTest {
     public static final int Y_MIN_MENOS = Y_MIN - 1;
     public static final int Y_MIN_MAS = Y_MIN + 1;
     public static final int Y_NOMINAL = Commons.ALIEN_INIT_Y;
-    public static final int Y_MAX = Commons.GROUND;
+    public static final int Y_MAX = Commons.BOARD_HEIGHT;
     public static final int Y_MAX_MENOS = Y_MAX - 1;
     public static final int Y_MAX_MAS = Y_MAX + 1;
 
