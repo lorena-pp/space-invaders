@@ -175,5 +175,83 @@ public class BoardWhiteTest {
     IMPOSIBLES QUE GENERAN LOS 2 IFS SECUENCIALES QUE ESTÁN DENTRO DEL FOR
      */
 
+    @Test
+    public void updateAliensCaminoB() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Board testBoard = new Board();
+        int dirInicial = testBoard.getDirection();
+        testBoard.getAliens().clear();
+        var alien = new Alien(Commons.BOARD_WIDTH/2, Commons.BOARD_HEIGHT/2);
+        testBoard.getAliens().add(alien);
+        alien.die();
+
+        Method updateMethod = Board.class.getDeclaredMethod("update_aliens");
+        updateMethod.setAccessible(true);
+        updateMethod.invoke(testBoard);
+
+        assertEquals(dirInicial, testBoard.getDirection(), "La dirección ha cambiado de valor");
+    }
+
+    @Test
+    public void updateAliensCaminoC() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Board testBoard = new Board();
+        int dirInicial = 1;
+        testBoard.setDirection(dirInicial);
+        testBoard.getAliens().clear();
+        var alien = new Alien(Commons.BOARD_WIDTH - Commons.BORDER_RIGHT, Commons.BOARD_HEIGHT/2);
+        testBoard.getAliens().add(alien);
+        alien.die();
+
+        Method updateMethod = Board.class.getDeclaredMethod("update_aliens");
+        updateMethod.setAccessible(true);
+        updateMethod.invoke(testBoard);
+
+        assertNotEquals(dirInicial, testBoard.getDirection(), "La dirección es igual a la inicial");
+    }
+
+    @Test
+    public void updateAliensCaminoD() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Board testBoard = new Board();
+        int dirInicial = -1;
+        testBoard.setDirection(dirInicial);
+        testBoard.getAliens().clear();
+        var alien = new Alien(Commons.BORDER_LEFT, Commons.BOARD_HEIGHT/2);
+        testBoard.getAliens().add(alien);
+        alien.die();
+
+        Method updateMethod = Board.class.getDeclaredMethod("update_aliens");
+        updateMethod.setAccessible(true);
+        updateMethod.invoke(testBoard);
+
+        assertNotEquals(dirInicial, testBoard.getDirection(), "La dirección es igual a la inicial");
+    }
+
+    @Test
+    public void updateAliensCaminoE() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Board testBoard = new Board();
+        testBoard.getAliens().clear();
+        var alien = new Alien(Commons.BOARD_WIDTH / 2, Commons.GROUND - Commons.ALIEN_HEIGHT);
+        testBoard.getAliens().add(alien);
+
+        Method updateMethod = Board.class.getDeclaredMethod("update_aliens");
+        updateMethod.setAccessible(true);
+        updateMethod.invoke(testBoard);
+
+        assertNotEquals("Invasion!", testBoard.getMessage(), "La partida debería continuar");
+    }
+
+    @Test
+    public void updateAliensCaminoF() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Board testBoard = new Board();
+        testBoard.getAliens().clear();
+        var alien = new Alien(Commons.BOARD_WIDTH / 2, Commons.GROUND);
+        testBoard.getAliens().add(alien);
+
+        Method updateMethod = Board.class.getDeclaredMethod("update_aliens");
+        updateMethod.setAccessible(true);
+        updateMethod.invoke(testBoard);
+
+        assertEquals("Invasion!", testBoard.getMessage(), "La partida debería haber terminado");
+    }
+
 }
 
