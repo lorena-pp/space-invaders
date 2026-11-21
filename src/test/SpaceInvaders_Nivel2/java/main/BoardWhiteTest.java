@@ -142,13 +142,13 @@ public class BoardWhiteTest {
                 testBoard.getDeaths() == prevdeaths && testBoard.getShot().getY() == prevpos,
                 "El disparo es visible"
         );
-        //EL DEATHS++ DE AL FINAL DEL METODO DE UPDATE SHOTS DEBERÍA SER THIS.SHOT.DIE()
+
     }
 
 
-
-
-
+/* ERRORES ENCONTRADOS EN UODATE_SHOTS DE PRIMERAS:
+   1 - EL DEATHS++ DE AL FINAL DEL METODO DE UPDATE SHOTS DEBERÍA SER THIS.SHOT.DIE()
+ */
 
 /* ERRORES ENCONTRADOS EN UODATE_ALIEN DE PRIMERAS:
    1 - EN EL SEGUNDO IF, SE HACE UNA COMPROBACION "X != Commons.BORDER_LEFT" CUANDO DEBERÍAS SER <=.
@@ -168,12 +168,6 @@ public class BoardWhiteTest {
 
         assertEquals(dirInicial, testBoard.getDirection(), "La dirección ha cambiado de valor");
     }
-
-    /*
-    EL TEMA CON LOS CAMINOS IMPOSIBLES ES QUE EL FOR DEL PRINCIPIO Y EL WHILE DE DESPUES DE ESE FOR RECORREN LA LISTA DE
-    ALIENS DE BOARD, ENTONCES SI NO ENTRA EN EL FOR, TAMPOCO EN EL WHILE. ADEMÁS, NO TE PODRÍA DEFINIR BIEN CUALES SON LOS CAMINOS
-    IMPOSIBLES QUE GENERAN LOS 2 IFS SECUENCIALES QUE ESTÁN DENTRO DEL FOR
-     */
 
     @Test
     public void updateAliensCaminoB() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {

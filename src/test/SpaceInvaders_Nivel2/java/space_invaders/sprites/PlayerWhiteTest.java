@@ -11,7 +11,11 @@ public class PlayerWhiteTest {
 
     @Test
     void keypressedTestCaminoA(){ //NO SE HA HECHO NINGÚN CASO DE USO PARA EL NODO 2
-        //CAMINO IMPOSIBLE
+        Board board = new Board();
+        KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
+                0, KeyEvent.VK_SPACE, KeyEvent.CHAR_UNDEFINED);
+        board.getPlayer().keyPressed(keyEvent);
+        assertEquals(0, board.getPlayer().dx,"DX debería ser 0 para no moverse");
     }
 
     @Test
@@ -27,15 +31,18 @@ public class PlayerWhiteTest {
     void keypressedTestCaminoC(){
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
-                0, KeyEvent.VK_SPACE, KeyEvent.CHAR_UNDEFINED);
+                0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
         board.getPlayer().keyPressed(keyEvent);
-        assertEquals(0, board.getPlayer().dx,"DX debería ser 0 para no moverse");
-
+        assertEquals(-2, board.getPlayer().dx,"DX debería ser -2 para irse a la izquierda");
     }
 
     @Test
     void keyreleasedTestCaminoA(){
-        //CAMINO IMPOSIBLE
+        Board board = new Board();
+        KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_RELEASED, System.currentTimeMillis(),
+                0, KeyEvent.VK_SPACE, KeyEvent.CHAR_UNDEFINED);
+        board.getPlayer().keyReleased(keyEvent);
+        assertEquals(0, board.getPlayer().dx,"DX debería ser 0 para no moverse");
     }
 
     @Test
@@ -51,7 +58,7 @@ public class PlayerWhiteTest {
     void keyreleasedTestCaminoC(){
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_RELEASED, System.currentTimeMillis(),
-                0, KeyEvent.VK_SPACE, KeyEvent.CHAR_UNDEFINED);
+                0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
         board.getPlayer().keyReleased(keyEvent);
         assertEquals(0, board.getPlayer().dx,"DX debería ser 0 para no moverse");
     }
