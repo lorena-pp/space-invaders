@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PlayerBlackTest {
 
-    public int MOV_IZQUIERDA = -2;
+    public static final int MOV_IZQUIERDA = -2;
     public int MOV_DERECHA = 2;
     public int SIN_MOV = 0;
 
