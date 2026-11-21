@@ -14,21 +14,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AlienTest {
 
-    private static final int X_MIN = Commons.BORDER_LEFT;
-    private static final int X_MIN_MENOS = X_MIN - 1;
-    private static final int X_MIN_MAS = X_MIN + 1;
-    private static final int X_NOMINAL = Commons.ALIEN_INIT_X;
-    private static final int X_MAX = Commons.BOARD_WIDTH - Commons.BORDER_RIGHT;
-    private static final int X_MAX_MENOS = X_MAX - 1;
-    private static final int X_MAX_MAS = X_MAX + 1;
+    public static final int X_MIN = Commons.BORDER_LEFT;
+    public static final int X_MIN_MENOS = X_MIN - 1;
+    public static final int X_MIN_MAS = X_MIN + 1;
+    public static final int X_NOMINAL = Commons.ALIEN_INIT_X;
+    public static final int X_MAX = Commons.BOARD_WIDTH - Commons.BORDER_RIGHT;
+    public static final int X_MAX_MENOS = X_MAX - 1;
+    public static final int X_MAX_MAS = X_MAX + 1;
 
-    private static final int Y_MIN = 0;
-    private static final int Y_MIN_MENOS = Y_MIN - 1;
-    private static final int Y_MIN_MAS = Y_MIN + 1;
-    private static final int Y_NOMINAL = Commons.ALIEN_INIT_Y;
-    private static final int Y_MAX = Commons.GROUND;
-    private static final int Y_MAX_MENOS = Y_MAX - 1;
-    private static final int Y_MAX_MAS = Y_MAX + 1;
+    public static final int Y_MIN = 0;
+    public static final int Y_MIN_MENOS = Y_MIN - 1;
+    public static final int Y_MIN_MAS = Y_MIN + 1;
+    public static final int Y_NOMINAL = Commons.ALIEN_INIT_Y;
+    public static final int Y_MAX = Commons.GROUND;
+    public static final int Y_MAX_MENOS = Y_MAX - 1;
+    public static final int Y_MAX_MAS = Y_MAX + 1;
 
     static Stream<Arguments> validAssignmentsProvider() {
         return Stream.of(
