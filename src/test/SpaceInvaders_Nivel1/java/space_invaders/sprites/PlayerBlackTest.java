@@ -115,11 +115,10 @@ public class PlayerBlackTest {
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                 0, KeyEvent.VK_RIGHT, KeyEvent.CHAR_UNDEFINED);
 
-        Player player = new Player();
-        player.keyPressed(keyEvent);
-        player.act();
+        board.getPlayer().keyPressed(keyEvent);
+        board.getPlayer().act();
 
-        boolean seMueveBien = valorInicX+2 == player.getX();
+        boolean seMueveBien = valorInicX+2 == board.getPlayer().getX();
         assertTrue(seMueveBien, "Player se ha movido a la derecha en 1 unidad");
     }
 
@@ -130,11 +129,10 @@ public class PlayerBlackTest {
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                 0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
 
-        Player player = new Player();
-        player.keyPressed(keyEvent);
-        player.act();
+        board.getPlayer().keyPressed(keyEvent);
+        board.getPlayer().act();
 
-        boolean seMueveBien = valorInicX-2 == player.getX();
+        boolean seMueveBien = valorInicX-2 == board.getPlayer().getX();
         assertTrue(seMueveBien, "Player se ha movido a la izquierda en 1 unidad");
     }
 
@@ -145,12 +143,11 @@ public class PlayerBlackTest {
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                 0, KeyEvent.VK_RIGHT, KeyEvent.CHAR_UNDEFINED);
 
-        Player player = new Player();
-        player.setX(valorInicX);
-        player.keyPressed(keyEvent);
-        player.act();
+        board.getPlayer().setX(valorInicX);
+        board.getPlayer().keyPressed(keyEvent);
+        board.getPlayer().act();
 
-        boolean noSeMueve = valorInicX == player.getX();
+        boolean noSeMueve = valorInicX == board.getPlayer().getX();
         assertTrue(noSeMueve, "Player no se ha movido a la derecha");
     }
 
@@ -161,29 +158,27 @@ public class PlayerBlackTest {
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                 0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
 
-        Player player = new Player();
-        player.setX(valorInicX);
-        player.keyPressed(keyEvent);
-        player.act();
 
-        boolean noSeMueve = valorInicX == player.getX();
+        board.getPlayer().setX(valorInicX);
+        board.getPlayer().keyPressed(keyEvent);
+        board.getPlayer().act();
+
+        boolean noSeMueve = valorInicX == board.getPlayer().getX();
         assertTrue(noSeMueve, "Player no se ha movido a la izquierda");
     }
 
     @Test
     void BVT_keyPressedDerecha_ExtremoDerecho_PixelesImpares() {
         int valorInicX = Commons.BOARD_WIDTH - Commons.PLAYER_WIDTH - 1;
-        //el menos -1 se añade para que, en caso de que la nave se mueva en pixeles impares, no se salga de los límites
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                 0, KeyEvent.VK_RIGHT, KeyEvent.CHAR_UNDEFINED);
 
-        Player player = new Player();
-        player.setX(valorInicX);
-        player.keyPressed(keyEvent);
-        player.act();
+        board.getPlayer().setX(valorInicX);
+        board.getPlayer().keyPressed(keyEvent);
+        board.getPlayer().act();
 
-        boolean noSeMueve = valorInicX == player.getX();
+        boolean noSeMueve = valorInicX == board.getPlayer().getX();
         assertTrue(noSeMueve, "Player no se ha movido a la derecha");
     }
 
@@ -194,12 +189,11 @@ public class PlayerBlackTest {
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                 0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
 
-        Player player = new Player();
-        player.setX(valorInicX);
-        player.keyPressed(keyEvent);
-        player.act();
+        board.getPlayer().setX(valorInicX);
+        board.getPlayer().keyPressed(keyEvent);
+        board.getPlayer().act();
 
-        boolean noSeMueve = valorInicX == player.getX();
+        boolean noSeMueve = valorInicX == board.getPlayer().getX();
         assertTrue(noSeMueve, "Player no se ha movido a la izquierda");
     }
 
@@ -212,27 +206,25 @@ public class PlayerBlackTest {
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_RELEASED, System.currentTimeMillis(),
                 0, KeyEvent.VK_RIGHT, KeyEvent.CHAR_UNDEFINED);
 
-        Player player = new Player();
-        player.keyReleased(keyEvent);
-        player.act();
+        board.getPlayer().keyReleased(keyEvent);
+        board.getPlayer().act();
 
-        boolean respuesta = valorInicX == player.getX();
+        boolean respuesta = valorInicX == board.getPlayer().getX();
         assertTrue(respuesta, "Release correcto");
     }
 
     @Test
     void CE_keyReleasedIzquierda_valoresNominales() {
         int valorInicX = Commons.BOARD_WIDTH/2;
-        Player player = new Player();
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_RELEASED, System.currentTimeMillis(),
                 0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
 
 
-        player.keyReleased(keyEvent);
-        player.act();
+        board.getPlayer().keyReleased(keyEvent);
+        board.getPlayer().act();
 
-        boolean respuesta = valorInicX == player.getX();
+        boolean respuesta = valorInicX == board.getPlayer().getX();
         assertTrue(respuesta, "Release correcto");
     }
 }
