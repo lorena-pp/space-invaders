@@ -247,5 +247,11 @@ public class BoardWhiteTest {
         assertEquals("Invasion!", testBoard.getMessage(), "La partida debería haber terminado");
     }
 
+    @Test
+    public void updateBomb_CaminoA(){
+        Board board = new Board();
+        // No tengo ni idea de hacerlo
+    }
+
 }
 
