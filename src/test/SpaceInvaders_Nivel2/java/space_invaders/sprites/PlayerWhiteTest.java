@@ -1,6 +1,7 @@
 package space_invaders.sprites;
 
 import main.Board;
+import main.Commons;
 import org.junit.jupiter.api.Test;
 
 import java.awt.event.KeyEvent;
@@ -61,6 +62,36 @@ public class PlayerWhiteTest {
                 0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
         board.getPlayer().keyReleased(keyEvent);
         assertEquals(0, board.getPlayer().dx,"DX debería ser 0 para no moverse");
+    }
+
+    @Test
+    void actCaminoA(){
+        Player player = new Player();
+
+        player.setX(Commons.BOARD_WIDTH/2);
+        player.dx = PlayerBlackTest.MOV_IZQUIERDA;
+
+        player.act();
+
+        assertEquals(Commons.BOARD_WIDTH/2 + PlayerBlackTest.MOV_IZQUIERDA, player.getX());
+    }
+
+    @Test
+    void actCaminoB(){
+        // código muerto --> camino imposible
+    }
+
+    @Test
+    void actCaminoC(){
+        Player player = new Player();
+
+        // corregir
+        player.setX(AlienTest.X_MAX * 3);
+        player.dx = PlayerBlackTest.MOV_DERECHA;
+
+        player.act();
+
+        assertEquals(AlienTest.X_MAX - 2 - Commons.PLAYER_WIDTH, player.getX());
     }
 
 }
