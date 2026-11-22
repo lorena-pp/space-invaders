@@ -2,9 +2,11 @@ package main;
 
 import org.junit.jupiter.api.Test;
 import space_invaders.sprites.Alien;
+import space_invaders.sprites.Player;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -228,9 +230,78 @@ public class BoardWhiteTest {
     }
 
     @Test
-    public void updateBomb_CaminoA() {
+    public void updateBomb_CaminoA() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board board = new Board();
-        // No tengo ni idea de hacerlo
+
+        Alien alien = new Alien(Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y);
+        alien.setDying(false);
+        board.setAliens(List.of(alien));
+
+        Player player = new Player();
+        player.setDying(false);
+        board.setPlayer(player);
+
+        Alien.Bomb bomb = alien.getBomb();
+        bomb.setX(player.getX());
+        bomb.setY(player.getY());
+        bomb.setDestroyed(false);
+
+        Method updateMethod = Board.class.getDeclaredMethod("update_bomb");
+        updateMethod.setAccessible(true);
+        updateMethod.invoke(board);
+
+        assertTrue(bomb.isDestroyed());
+        assertTrue(player.isDying());
+    }
+
+    @Test
+    public void updateBomb_CaminoB() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Board board = new Board();
+
+        Alien alien = new Alien(Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y);
+        alien.setDying(false);
+        board.setAliens(List.of(alien));
+
+        Player player = new Player();
+        player.setDying(true);
+        board.setPlayer(player);
+
+        Alien.Bomb bomb = alien.getBomb();
+        bomb.setX(player.getX());
+        bomb.setY(player.getY());
+        bomb.setDestroyed(false);
+
+        Method updateMethod = Board.class.getDeclaredMethod("update_bomb");
+        updateMethod.setAccessible(true);
+        updateMethod.invoke(board);
+
+        assertFalse(bomb.isDestroyed());
+        assertFalse(player.isDying());
+    }
+
+    @Test
+    public void updateBomb_CaminoC() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Board board = new Board();
+
+        Alien alien = new Alien(Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y);
+        alien.setDying(false);
+        board.setAliens(List.of(alien));
+
+        Player player = new Player();
+        player.setDying(true);
+        board.setPlayer(player);
+
+        Alien.Bomb bomb = alien.getBomb();
+        bomb.setX(alien.getX());
+        bomb.setY(alien.getY());
+        bomb.setDestroyed(false);
+
+        Method updateMethod = Board.class.getDeclaredMethod("update_bomb");
+        updateMethod.setAccessible(true);
+        updateMethod.invoke(board);
+
+        assertFalse(bomb.isDestroyed());
+        assertFalse(player.isDying());
     }
 
     @Test
