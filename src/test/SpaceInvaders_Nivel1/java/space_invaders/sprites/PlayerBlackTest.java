@@ -16,8 +16,8 @@ public class PlayerBlackTest {
 
     @Test
     void CE_creacionPlayerPosicionCorrecta_valoresNominales() {
-        int valorX = Commons.BOARD_WIDTH/2;
-        int valorY = Commons.GROUND-10; //el enunciado dice que está 10 píxeles por encima del ground
+        int valorX = Commons.BOARD_WIDTH / 2;
+        int valorY = Commons.GROUND - 10; //el enunciado dice que está 10 píxeles por encima del ground
 
         Player player = new Player();
         boolean posicionCorrecta = player.getX() == valorX && player.getY() == valorY;
@@ -28,7 +28,7 @@ public class PlayerBlackTest {
     @Test
     public void TD_movIzq_zonaCentro() {
         int valorDX = MOV_IZQUIERDA;
-        int valorX = Commons.BOARD_WIDTH/2;
+        int valorX = Commons.BOARD_WIDTH / 2;
 
         Player player = new Player();
         player.setX(valorX);
@@ -60,7 +60,7 @@ public class PlayerBlackTest {
     @Test
     public void TD_sinMov_noSeMueve() {
         int valorDX = SIN_MOV;
-        int valorX = Commons.BOARD_WIDTH/2;
+        int valorX = Commons.BOARD_WIDTH / 2;
 
         Player player = new Player();
         player.setX(valorX);
@@ -76,7 +76,7 @@ public class PlayerBlackTest {
     @Test
     public void TD_movDer_zonaCentro() {
         int valorDX = MOV_DERECHA;
-        int valorX = Commons.BOARD_WIDTH/2;
+        int valorX = Commons.BOARD_WIDTH / 2;
 
         Player player = new Player();
         player.setX(valorX);
@@ -107,7 +107,7 @@ public class PlayerBlackTest {
 
     @Test
     void BVT_keyPressedDerecha_valoresNominales() {
-        int valorInicX = Commons.BOARD_WIDTH/2;
+        int valorInicX = Commons.BOARD_WIDTH / 2;
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                 0, KeyEvent.VK_RIGHT, KeyEvent.CHAR_UNDEFINED);
@@ -115,13 +115,13 @@ public class PlayerBlackTest {
         board.getPlayer().keyPressed(keyEvent);
         board.getPlayer().act();
 
-        boolean seMueveBien = valorInicX+2 == board.getPlayer().getX();
+        boolean seMueveBien = valorInicX + 2 == board.getPlayer().getX();
         assertTrue(seMueveBien, "Player se ha movido a la derecha en 1 unidad");
     }
 
     @Test
     void BVT_keyPressedIzquierda_valoresNominales() { //HAY QUE CAMBIAR EL TEST PARA QUE USE EL PLAYER DE BOARD
-        int valorInicX = Commons.BOARD_WIDTH/2;
+        int valorInicX = Commons.BOARD_WIDTH / 2;
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                 0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
@@ -129,7 +129,7 @@ public class PlayerBlackTest {
         board.getPlayer().keyPressed(keyEvent);
         board.getPlayer().act();
 
-        boolean seMueveBien = valorInicX-2 == board.getPlayer().getX();
+        boolean seMueveBien = valorInicX - 2 == board.getPlayer().getX();
         assertTrue(seMueveBien, "Player se ha movido a la izquierda en 1 unidad");
     }
 
@@ -194,10 +194,9 @@ public class PlayerBlackTest {
     }
 
 
-
     @Test
     void CE_keyReleasedDerecha_valoresNominales() {
-        int valorInicX = Commons.BOARD_WIDTH/2;
+        int valorInicX = Commons.BOARD_WIDTH / 2;
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_RELEASED, System.currentTimeMillis(),
                 0, KeyEvent.VK_RIGHT, KeyEvent.CHAR_UNDEFINED);
@@ -211,7 +210,7 @@ public class PlayerBlackTest {
 
     @Test
     void CE_keyReleasedIzquierda_valoresNominales() {
-        int valorInicX = Commons.BOARD_WIDTH/2;
+        int valorInicX = Commons.BOARD_WIDTH / 2;
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_RELEASED, System.currentTimeMillis(),
                 0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);

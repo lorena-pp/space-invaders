@@ -2,8 +2,6 @@ package main;
 
 import org.junit.jupiter.api.Test;
 import space_invaders.sprites.Alien;
-import space_invaders.sprites.Player;
-import space_invaders.sprites.Shot;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -22,10 +20,11 @@ public class BoardWhiteTest {
 
         assertEquals("Game won!", testBoard.getMessage());
     }
+
     @Test
     public void updateCaminoB() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
-        testBoard.setDeaths(Commons.NUMBER_OF_ALIENS_TO_DESTROY+1);
+        testBoard.setDeaths(Commons.NUMBER_OF_ALIENS_TO_DESTROY + 1);
 
         Method updateMethod = Board.class.getDeclaredMethod("update");
         updateMethod.setAccessible(true);
@@ -35,15 +34,14 @@ public class BoardWhiteTest {
     }
 
 
-
     @Test
     public void updateShotsCaminoA() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         testBoard.getAliens().clear();
-        var alien = new Alien(Commons.BOARD_WIDTH/2, Commons.BOARD_HEIGHT/2);
+        var alien = new Alien(Commons.BOARD_WIDTH / 2, Commons.BOARD_HEIGHT / 2);
         testBoard.getAliens().add(alien);
-        testBoard.getShot().setX(Commons.BOARD_WIDTH/2);
-        testBoard.getShot().setY(Commons.BOARD_HEIGHT/2);
+        testBoard.getShot().setX(Commons.BOARD_WIDTH / 2);
+        testBoard.getShot().setY(Commons.BOARD_HEIGHT / 2);
         int prevdeaths = testBoard.getDeaths();
 
         Method updateMethod = Board.class.getDeclaredMethod("update_shots");
@@ -51,7 +49,7 @@ public class BoardWhiteTest {
         updateMethod.invoke(testBoard);
 
         assertTrue(alien.isDying(), "El alien no ha sido interceptado por el disparo");
-        assertEquals(prevdeaths + 1,  testBoard.getDeaths(), "El numero de muertes se ha quedado igual");
+        assertEquals(prevdeaths + 1, testBoard.getDeaths(), "El numero de muertes se ha quedado igual");
         assertFalse(testBoard.getShot().isVisible(), "El disparo sigue siendo visible");
     }
 
@@ -59,10 +57,10 @@ public class BoardWhiteTest {
     public void updateShotsCaminoB() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         testBoard.getAliens().clear();
-        var alien = new Alien(Commons.BOARD_WIDTH/2 - 50, Commons.BOARD_HEIGHT/2 - 50);
+        var alien = new Alien(Commons.BOARD_WIDTH / 2 - 50, Commons.BOARD_HEIGHT / 2 - 50);
         testBoard.getAliens().add(alien);
-        testBoard.getShot().setX(Commons.BOARD_WIDTH/2 + 50);
-        testBoard.getShot().setY(Commons.BOARD_HEIGHT/2 + 50);
+        testBoard.getShot().setX(Commons.BOARD_WIDTH / 2 + 50);
+        testBoard.getShot().setY(Commons.BOARD_HEIGHT / 2 + 50);
 
         Method updateMethod = Board.class.getDeclaredMethod("update_shots");
         updateMethod.setAccessible(true);
@@ -79,7 +77,7 @@ public class BoardWhiteTest {
     public void updateShotsCaminoC() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         testBoard.getAliens().clear();
-        var alien = new Alien(Commons.BOARD_WIDTH/2, Commons.BOARD_HEIGHT/2);
+        var alien = new Alien(Commons.BOARD_WIDTH / 2, Commons.BOARD_HEIGHT / 2);
         testBoard.getAliens().add(alien);
         alien.die();
 
@@ -113,7 +111,7 @@ public class BoardWhiteTest {
     @Test
     public void updateShotsCaminoE() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
-        testBoard.getShot().setY(Commons.BOARD_HEIGHT/2);
+        testBoard.getShot().setY(Commons.BOARD_HEIGHT / 2);
         testBoard.getAliens().clear();
 
         Method updateMethod = Board.class.getDeclaredMethod("update_shots");
@@ -121,7 +119,7 @@ public class BoardWhiteTest {
         updateMethod.invoke(testBoard);
 
         assertFalse(
-                testBoard.getShot().getY() == Commons.BOARD_HEIGHT/2,
+                testBoard.getShot().getY() == Commons.BOARD_HEIGHT / 2,
                 "La posición del disparo no se ha actualizado"
         );
     }
@@ -173,7 +171,7 @@ public class BoardWhiteTest {
         Board testBoard = new Board();
         int dirInicial = testBoard.getDirection();
         testBoard.getAliens().clear();
-        var alien = new Alien(Commons.BORDER_LEFT, Commons.BOARD_HEIGHT/2);
+        var alien = new Alien(Commons.BORDER_LEFT, Commons.BOARD_HEIGHT / 2);
         testBoard.getAliens().add(alien);
         alien.die();
 
@@ -190,7 +188,7 @@ public class BoardWhiteTest {
         int dirInicial = -1;
         testBoard.setDirection(dirInicial);
         testBoard.getAliens().clear();
-        var alien = new Alien(Commons.BOARD_WIDTH/2, Commons.BOARD_HEIGHT/2);
+        var alien = new Alien(Commons.BOARD_WIDTH / 2, Commons.BOARD_HEIGHT / 2);
         testBoard.getAliens().add(alien);
         alien.die();
 
@@ -230,14 +228,14 @@ public class BoardWhiteTest {
     }
 
     @Test
-    public void updateBomb_CaminoA(){
+    public void updateBomb_CaminoA() {
         Board board = new Board();
         // No tengo ni idea de hacerlo
     }
 
     @Test
     public void gameInit_CaminoA() {
-        Board board =  new Board();
+        Board board = new Board();
 
         board.getAliens().clear();
 
