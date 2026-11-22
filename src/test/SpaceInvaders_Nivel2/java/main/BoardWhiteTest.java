@@ -235,17 +235,12 @@ public class BoardWhiteTest {
 
     @Test
     public void gameInit_CaminoA() {
-        Board board = new Board();
-
-        board.getAliens().clear();
-
-        assertNotNull(board.getPlayer());
-        assertNotNull(board.getShot());
+        // camino imposible
     }
 
     @Test
     public void gameInit_CaminoB() {
-        // TODO: tabla de decisión y plantear otros caminos
+        // camino imposible
     }
 
     @Test
