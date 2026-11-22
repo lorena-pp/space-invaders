@@ -2,6 +2,8 @@ package main;
 
 import org.junit.jupiter.api.Test;
 import space_invaders.sprites.Alien;
+import space_invaders.sprites.Player;
+import space_invaders.sprites.Shot;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -231,6 +233,43 @@ public class BoardWhiteTest {
     public void updateBomb_CaminoA(){
         Board board = new Board();
         // No tengo ni idea de hacerlo
+    }
+
+    @Test
+    public void gameInit_CaminoA() {
+        Board board =  new Board();
+
+        board.getAliens().clear();
+
+        assertNotNull(board.getPlayer());
+        assertNotNull(board.getShot());
+    }
+
+    @Test
+    public void gameInit_CaminoB() {
+        // TODO: tabla de decisión y plantear otros caminos
+    }
+
+    @Test
+    public void gameInit_CaminoC() {
+        Board board = new Board();
+
+        Alien primerAlien = board.getAliens().get(0);
+        assertEquals(Commons.ALIEN_INIT_X, primerAlien.getX());
+        assertEquals(Commons.ALIEN_INIT_Y, primerAlien.getY());
+
+        // ERROR: Utiliza - en lugar de + en el cálculo de la coordenada vertical
+        Alien ultimoAlien = board.getAliens().get(board.getAliens().size() - 1);
+        int expectedLastX = Commons.ALIEN_INIT_X + Commons.ALIEN_SEPARATOR * (Commons.ALIEN_COLUMNS - 1);
+        int expectedLastY = Commons.ALIEN_INIT_Y - Commons.ALIEN_SEPARATOR * (Commons.ALIEN_ROWS - 1);
+        assertEquals(expectedLastX, ultimoAlien.getX());
+        assertEquals(expectedLastY, ultimoAlien.getY());
+
+        assertEquals(Commons.ALIEN_ROWS * Commons.ALIEN_COLUMNS, board.getAliens().size());
+
+        assertNotNull(board.getAliens());
+        assertNotNull(board.getPlayer());
+        assertNotNull(board.getShot());
     }
 
 }
