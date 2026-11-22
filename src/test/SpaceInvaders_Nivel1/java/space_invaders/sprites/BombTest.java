@@ -123,6 +123,6 @@ public class BombTest {
         Alien alien = new Alien(Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y);
         Alien.Bomb bomb = alien.new Bomb(valorX, valorY);
 
-        assertFalse(bomb.isDestroyed(), "Bomb shouldn't be initialized as destroyed");
+        assertTrue(bomb.isDestroyed(), "Bomb shouldn't be in launch");
     }
 }
