@@ -26,8 +26,8 @@ public class PlayerBlackTest {
                 Arguments.of(X_CENTRO, SIN_MOV, X_CENTRO + SIN_MOV, "Player should not be moved"),
                 Arguments.of(X_CENTRO, MOV_DERECHA, X_CENTRO + MOV_DERECHA, "Player should move to the right"),
 
-                Arguments.of(AlienTest.X_MIN, MOV_IZQUIERDA, AlienTest.X_MIN, "Player should stay in the left corner"),
-                Arguments.of(AlienTest.X_MAX, MOV_DERECHA, AlienTest.X_MAX, "Player should stay in the right corner")
+                Arguments.of(AlienBlackTest.X_MIN, MOV_IZQUIERDA, AlienBlackTest.X_MIN, "Player should stay in the left corner"),
+                Arguments.of(AlienBlackTest.X_MAX, MOV_DERECHA, AlienBlackTest.X_MAX, "Player should stay in the right corner")
         );
     }
 

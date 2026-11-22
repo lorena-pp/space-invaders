@@ -86,7 +86,7 @@ public class PlayerWhiteTest {
 
         player.act();
 
-        assertEquals(AlienTest.X_MIN, player.getX());
+        assertEquals(AlienBlackTest.X_MIN, player.getX());
     }
 
     @Test
@@ -98,7 +98,7 @@ public class PlayerWhiteTest {
 
         player.act();
 
-        assertEquals(AlienTest.X_MAX - 2 - Commons.PLAYER_WIDTH, player.getX());
+        assertEquals(AlienBlackTest.X_MAX - 2 - Commons.PLAYER_WIDTH, player.getX());
     }
 
     @Test
