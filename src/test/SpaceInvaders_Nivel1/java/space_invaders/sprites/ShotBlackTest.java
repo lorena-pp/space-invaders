@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ShotTest {
+public class ShotBlackTest {
 
     int H_SPACE = 6;
     int V_SPACE = 1;

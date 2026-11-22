@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BombTest {
+public class BombBlackTest {
     @Test
     void BVT_creacionBombaPosicionCorrecta_valoresNominales() {
         int valorX = Commons.ALIEN_INIT_X;

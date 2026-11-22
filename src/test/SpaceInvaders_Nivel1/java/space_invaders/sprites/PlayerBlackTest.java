@@ -3,8 +3,12 @@ package space_invaders.sprites;
 import main.Board;
 import main.Commons;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.awt.event.KeyEvent;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -14,95 +18,41 @@ public class PlayerBlackTest {
     public static final int MOV_DERECHA = 2;
     public static final int SIN_MOV = 0;
 
+    public static final int X_CENTRO = Commons.BOARD_WIDTH / 2;
+
+    static Stream<Arguments> actMovementProvider() {
+        return Stream.of(
+                Arguments.of(X_CENTRO, MOV_IZQUIERDA, X_CENTRO + MOV_IZQUIERDA, "Player should be moved to the left"),
+                Arguments.of(X_CENTRO, SIN_MOV, X_CENTRO + SIN_MOV, "Player should not be moved"),
+                Arguments.of(X_CENTRO, MOV_DERECHA, X_CENTRO + MOV_DERECHA, "Player should move to the right"),
+
+                Arguments.of(AlienBlackTest.X_MIN, MOV_IZQUIERDA, AlienBlackTest.X_MIN, "Player should stay in the left corner"),
+                Arguments.of(AlienBlackTest.X_MAX, MOV_DERECHA, AlienBlackTest.X_MAX, "Player should stay in the right corner")
+        );
+    }
+
     @Test
     void CE_creacionPlayerPosicionCorrecta_valoresNominales() {
-        int valorX = Commons.BOARD_WIDTH / 2;
-        int valorY = Commons.GROUND - 10; //el enunciado dice que está 10 píxeles por encima del ground
+        int valorY = Commons.GROUND - 10; // el enunciado dice que está 10 píxeles por encima del ground
 
         Player player = new Player();
-        boolean posicionCorrecta = player.getX() == valorX && player.getY() == valorY;
+        boolean posicionCorrecta = player.getX() == X_CENTRO && player.getY() == valorY;
 
         assertTrue(posicionCorrecta, "Player should be in the correct position");
     }
 
-    @Test
-    public void TD_movIzq_zonaCentro() {
-        int valorDX = MOV_IZQUIERDA;
-        int valorX = Commons.BOARD_WIDTH / 2;
-
+    @ParameterizedTest
+    @MethodSource("actMovementProvider")
+    void TD_act_movimientoYLimites(int valorX, int valorDX, int expectedX, String mensaje) {
         Player player = new Player();
         player.setX(valorX);
         player.dx = valorDX;
 
         player.act();
 
-        boolean posicionActualizada = player.getX() == valorX + valorDX;
+        boolean posicionActualizada = player.getX() == expectedX;
 
-        assertTrue(posicionActualizada, "Player should be moved to the left");
-    }
-
-    @Test
-    public void TD_movIzq_choqueIzquierdo() {
-        int valorDX = MOV_IZQUIERDA;
-        int valorX = AlienTest.X_MIN;
-
-        Player player = new Player();
-        player.setX(valorX);
-        player.dx = valorDX;
-
-        player.act();
-
-        boolean posicionActualizada = player.getX() == AlienTest.X_MIN;
-
-        assertTrue(posicionActualizada, "Player should stay in the left corner");
-    }
-
-    @Test
-    public void TD_sinMov_noSeMueve() {
-        int valorDX = SIN_MOV;
-        int valorX = Commons.BOARD_WIDTH / 2;
-
-        Player player = new Player();
-        player.setX(valorX);
-        player.dx = valorDX;
-
-        player.act();
-
-        boolean posicionActualizada = player.getX() == valorX + valorDX;
-
-        assertTrue(posicionActualizada, "Player should not be moved");
-    }
-
-    @Test
-    public void TD_movDer_zonaCentro() {
-        int valorDX = MOV_DERECHA;
-        int valorX = Commons.BOARD_WIDTH / 2;
-
-        Player player = new Player();
-        player.setX(valorX);
-        player.dx = valorDX;
-
-        player.act();
-
-        boolean posicionActualizada = player.getX() == valorX + valorDX;
-
-        assertTrue(posicionActualizada, "Player should move to the right");
-    }
-
-    @Test
-    public void TD_movDer_choqueDerecho() {
-        int valorDX = MOV_DERECHA;
-        int valorX = AlienTest.X_MAX;
-
-        Player player = new Player();
-        player.setX(valorX);
-        player.dx = valorDX;
-
-        player.act();
-
-        boolean posicionActualizada = player.getX() == AlienTest.X_MAX;
-
-        assertTrue(posicionActualizada, "Player should stay in the right corner");
+        assertTrue(posicionActualizada, mensaje);
     }
 
     @Test

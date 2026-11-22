@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class AlienTest {
+public class AlienBlackTest {
 
     public static final int X_MIN = Commons.BORDER_LEFT;
     public static final int X_MIN_MENOS = X_MIN - 1;
