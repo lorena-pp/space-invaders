@@ -114,4 +114,15 @@ public class BombTest {
 
         assertTrue(posicionCorrecta, "Bomb should be in the correct position");
     }
+
+    @Test
+    void creacionBombCorrectoEstado() {
+        int valorX = Commons.BOARD_WIDTH;
+        int valorY = Commons.ALIEN_INIT_Y;
+
+        Alien alien = new Alien(Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y);
+        Alien.Bomb bomb = alien.new Bomb(valorX, valorY);
+
+        assertFalse(bomb.isDestroyed(), "Bomb shouldn't be initialized as destroyed");
+    }
 }
