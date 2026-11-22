@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.awt.event.KeyEvent;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PlayerWhiteTest {
 
@@ -98,6 +99,26 @@ public class PlayerWhiteTest {
         player.act();
 
         assertEquals(AlienTest.X_MAX - 2 - Commons.PLAYER_WIDTH, player.getX());
+    }
+
+    @Test
+    void initPlayerCaminoA(){
+        Player player = new Player();
+
+        assertEquals(Commons.BOARD_WIDTH/2, player.getX());
+        assertEquals(Commons.GROUND - 10, player.getY());
+    }
+
+    @Test
+    void initPlayerCaminoB(){
+        Player player = new Player();
+
+        // hacer que entre al primer if (hacer que imageURL sea null) (no sé cómo)
+
+        assertThrows(
+                IllegalStateException.class,
+                () -> new Player()
+        );
     }
 
 }
