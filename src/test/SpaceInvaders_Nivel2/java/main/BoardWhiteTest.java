@@ -229,7 +229,7 @@ public class BoardWhiteTest {
         Method updateMethod = Board.class.getDeclaredMethod("update_aliens");
         updateMethod.setAccessible(true);
         updateMethod.invoke(testBoard);
-
+        assertFalse(testBoard.isInGame(), "La partida debería continuar");
         assertNotEquals("Invasion!", testBoard.getMessage(), "La partida debería continuar");
     }
 
@@ -243,7 +243,7 @@ public class BoardWhiteTest {
         Method updateMethod = Board.class.getDeclaredMethod("update_aliens");
         updateMethod.setAccessible(true);
         updateMethod.invoke(testBoard);
-
+        assertFalse(testBoard.isInGame(), "La partida debería continuar");
         assertEquals("Invasion!", testBoard.getMessage(), "La partida debería haber terminado");
     }
 
