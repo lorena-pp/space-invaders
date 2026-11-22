@@ -473,7 +473,8 @@ public class Board extends JPanel {
      * Las bombas que alcanzan el suelo (límite calculado con {@link main.Commons#GROUND} - 
      * {@link main.Commons#BOMB_HEIGHT}) se marcan como destruidas.</dd></dl>
      */
-    private void update_bomb(){
+    private void
+    update_bomb(){
         var generator = new Random();
 
         for (Alien alien : this.aliens) {
