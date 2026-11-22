@@ -155,7 +155,6 @@ public class PlayerBlackTest {
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                 0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
 
-
         board.getPlayer().setX(valorInicX);
         board.getPlayer().keyPressed(keyEvent);
         board.getPlayer().act();
@@ -216,7 +215,6 @@ public class PlayerBlackTest {
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_RELEASED, System.currentTimeMillis(),
                 0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
-
 
         board.getPlayer().keyReleased(keyEvent);
         board.getPlayer().act();

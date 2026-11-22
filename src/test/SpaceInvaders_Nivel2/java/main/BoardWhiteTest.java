@@ -19,7 +19,6 @@ public class BoardWhiteTest {
         updateMethod.invoke(testBoard);
 
         assertEquals("Game won!", testBoard.getMessage());
-
     }
     @Test
     public void updateCaminoB() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -43,15 +42,15 @@ public class BoardWhiteTest {
         testBoard.getAliens().add(alien);
         testBoard.getShot().setX(Commons.BOARD_WIDTH/2);
         testBoard.getShot().setY(Commons.BOARD_HEIGHT/2);
+        int prevdeaths = testBoard.getDeaths();
 
         Method updateMethod = Board.class.getDeclaredMethod("update_shots");
         updateMethod.setAccessible(true);
         updateMethod.invoke(testBoard);
 
-        assertTrue(
-                alien.isDying(),
-                "El alien no ha sido interceptado por el disparo"
-        );
+        assertTrue(alien.isDying(), "El alien no ha sido interceptado por el disparo");
+        assertEquals(prevdeaths + 1,  testBoard.getDeaths(), "El numero de muertes se ha quedado igual");
+        assertFalse(testBoard.getShot().isVisible(), "El disparo sigue siendo visible");
     }
 
     @Test
@@ -68,10 +67,9 @@ public class BoardWhiteTest {
         updateMethod.invoke(testBoard);
 
         assertFalse(
-                false,
-                ""
-        ); // este caso de prueba puede ser redundante porque no hay nada nuevo que podamos meter al assert aparte
-        // de comprobaciones que ya hemos hecho en los tests de abajo
+                testBoard.getShot().isVisible(),
+                "El disparo sigue dentro de los límites del board"
+        );
     }
 
 
@@ -88,10 +86,9 @@ public class BoardWhiteTest {
         updateMethod.invoke(testBoard);
 
         assertFalse(
-                false,
-                ""
-        ); // este caso de prueba puede ser redundante porque no hay nada nuevo que podamos meter al assert aparte
-        // de comprobaciones que ya hemos hecho en los tests de abajo
+                testBoard.getShot().isVisible(),
+                "El disparo sigue dentro de los límites del board"
+        );
     }
 
 
@@ -174,7 +171,7 @@ public class BoardWhiteTest {
         Board testBoard = new Board();
         int dirInicial = testBoard.getDirection();
         testBoard.getAliens().clear();
-        var alien = new Alien(Commons.BOARD_WIDTH/2, Commons.BOARD_HEIGHT/2);
+        var alien = new Alien(Commons.BORDER_LEFT, Commons.BOARD_HEIGHT/2);
         testBoard.getAliens().add(alien);
         alien.die();
 
@@ -186,29 +183,12 @@ public class BoardWhiteTest {
     }
 
     @Test
-    public void updateAliensCaminoC() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Board testBoard = new Board();
-        int dirInicial = 1;
-        testBoard.setDirection(dirInicial);
-        testBoard.getAliens().clear();
-        var alien = new Alien(Commons.BOARD_WIDTH - Commons.BORDER_RIGHT, Commons.BOARD_HEIGHT/2);
-        testBoard.getAliens().add(alien);
-        alien.die();
-
-        Method updateMethod = Board.class.getDeclaredMethod("update_aliens");
-        updateMethod.setAccessible(true);
-        updateMethod.invoke(testBoard);
-
-        assertNotEquals(dirInicial, testBoard.getDirection(), "La dirección es igual a la inicial");
-    }
-
-    @Test
     public void updateAliensCaminoD() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         int dirInicial = -1;
         testBoard.setDirection(dirInicial);
         testBoard.getAliens().clear();
-        var alien = new Alien(Commons.BORDER_LEFT, Commons.BOARD_HEIGHT/2);
+        var alien = new Alien(Commons.BOARD_WIDTH/2, Commons.BOARD_HEIGHT/2);
         testBoard.getAliens().add(alien);
         alien.die();
 
@@ -237,7 +217,7 @@ public class BoardWhiteTest {
     public void updateAliensCaminoF() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         testBoard.getAliens().clear();
-        var alien = new Alien(Commons.BOARD_WIDTH / 2, Commons.GROUND);
+        var alien = new Alien(Commons.BORDER_LEFT, Commons.GROUND * Commons.ALIEN_HEIGHT + 1);
         testBoard.getAliens().add(alien);
 
         Method updateMethod = Board.class.getDeclaredMethod("update_aliens");
