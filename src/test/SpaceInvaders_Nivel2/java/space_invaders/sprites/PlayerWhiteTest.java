@@ -78,15 +78,21 @@ public class PlayerWhiteTest {
 
     @Test
     void actCaminoB(){
-        // código muerto --> camino imposible
+        Player player = new Player();
+
+        player.setX(2);
+        player.dx = PlayerBlackTest.MOV_IZQUIERDA;
+
+        player.act();
+
+        assertEquals(AlienTest.X_MIN, player.getX());
     }
 
     @Test
     void actCaminoC(){
         Player player = new Player();
 
-        // corregir
-        player.setX(AlienTest.X_MAX * 3);
+        player.setX(Commons.BOARD_WIDTH * 2 * Commons.PLAYER_WIDTH);
         player.dx = PlayerBlackTest.MOV_DERECHA;
 
         player.act();
