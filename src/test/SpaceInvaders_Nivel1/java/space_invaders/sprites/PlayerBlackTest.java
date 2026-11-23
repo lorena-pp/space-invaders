@@ -2,6 +2,7 @@ package space_invaders.sprites;
 
 import main.Board;
 import main.Commons;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,6 +26,7 @@ public class PlayerBlackTest {
     public class PlayerStandardTests {
 
         @Test
+        @DisplayName(value = "CN-32")
         public void CE_creacionPlayer_PosicionCorrecta_valoresNominales() {
             int valorY = Commons.GROUND - 10;
 
@@ -34,21 +36,25 @@ public class PlayerBlackTest {
             assertTrue(posicionCorrecta, "Player should be in the correct position");
         }
     }
+
     @Nested
     public class PlayerActParameterizedTest {
 
         public static Stream<Arguments> data() {
             return Stream.of(
-                    Arguments.of(X_CENTRO, MOV_IZQUIERDA, X_CENTRO + MOV_IZQUIERDA, "Player should be moved to the left"),
-                    Arguments.of(X_CENTRO, SIN_MOV, X_CENTRO + SIN_MOV, "Player should not be moved"),
-                    Arguments.of(X_CENTRO, MOV_DERECHA, X_CENTRO + MOV_DERECHA, "Player should move to the right"),
 
-                    Arguments.of(AlienBlackTest.X_MIN, MOV_IZQUIERDA, AlienBlackTest.X_MIN, "Player should stay in the left corner"),
-                    Arguments.of(AlienBlackTest.X_MAX, MOV_DERECHA, AlienBlackTest.X_MAX, "Player should stay in the right corner")
+                    // Clases válidas
+                    Arguments.of("CN-33", X_CENTRO, SIN_MOV, X_CENTRO + SIN_MOV, "Player should not be moved"),
+                    Arguments.of("CN-34", X_CENTRO, MOV_IZQUIERDA, X_CENTRO + MOV_IZQUIERDA, "Player should be moved to the left"),
+                    Arguments.of("CN-35", X_CENTRO, MOV_DERECHA, X_CENTRO + MOV_DERECHA, "Player should move to the right"),
+
+                    // Clases inválidas
+                    Arguments.of("CN-36", AlienBlackTest.X_MIN, MOV_IZQUIERDA, AlienBlackTest.X_MIN, "Player should stay in the left corner"),
+                    Arguments.of("CN-37", AlienBlackTest.X_MAX, MOV_DERECHA, AlienBlackTest.X_MAX, "Player should stay in the right corner")
             );
         }
 
-        @ParameterizedTest(name = "act() X:{0} DX:{1} -> Esperado X:{2}")
+        @ParameterizedTest(name = " {0}: act() X:{1} DX:{2} -> Esperado X:{3}")
         @MethodSource("data")
         public void TD_act_movimientoYLimites(int valorX, int valorDX, int expectedX, String mensaje) {
             Player player = new Player();
@@ -62,6 +68,7 @@ public class PlayerBlackTest {
             assertTrue(posicionActualizada, mensaje);
         }
     }
+
     @Nested
     public class PlayerKeyPressedParameterizedTest {
 
@@ -95,6 +102,7 @@ public class PlayerBlackTest {
             assertTrue(resultadoCorrecto, mensaje);
         }
     }
+
     @Nested
     public class PlayerKeyReleasedParameterizedTest {
 
