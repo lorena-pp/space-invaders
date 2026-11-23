@@ -17,7 +17,7 @@ public class AliensWhiteTest {
 
     @Test
     public void initAliens_CaminoB() {
-        Alien alien = new Alien(AlienBlackTest.X_MAX_MAS, Commons.ALIEN_INIT_Y);
+        Alien alien = new Alien(Commons.BOARD_WIDTH+1, Commons.ALIEN_INIT_Y);
 
         assertEquals(AlienBlackTest.X_MAX, alien.getBomb().getX());
         assertEquals(alien.getBomb().getY(), alien.getY());
@@ -25,7 +25,7 @@ public class AliensWhiteTest {
 
     @Test
     public void initAliens_CaminoC() {
-        Alien alien = new Alien(AlienBlackTest.X_MIN_MENOS, Commons.ALIEN_INIT_Y);
+        Alien alien = new Alien(-1, Commons.ALIEN_INIT_Y);
 
         assertEquals(AlienBlackTest.X_MIN, alien.getBomb().getX());
         assertEquals(alien.getBomb().getY(), alien.getY());

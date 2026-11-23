@@ -230,6 +230,23 @@ public class BoardWhiteTest {
     }
 
     @Test
+    public void updateAliens_CaminoG() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Board testBoard = new Board();
+        int dirInicial = 1;
+        testBoard.setDirection(dirInicial);
+        testBoard.getAliens().clear();
+        var alien = new Alien(Commons.BOARD_WIDTH - Commons.BORDER_RIGHT, Commons.BOARD_HEIGHT / 2);
+        testBoard.getAliens().add(alien);
+
+        Method updateMethod = Board.class.getDeclaredMethod("update_aliens");
+        updateMethod.setAccessible(true);
+        updateMethod.invoke(testBoard);
+
+        assertEquals(dirInicial, testBoard.getDirection(), "La dirección debería haber cambiado de valor");
+    }
+
+
+    @Test
     public void updateBomb_CaminoA() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board board = new Board();
 
