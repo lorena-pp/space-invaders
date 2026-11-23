@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.awt.event.KeyEvent;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PlayerWhiteTest {
 
@@ -111,14 +110,8 @@ public class PlayerWhiteTest {
 
     @Test
     void initPlayer_CaminoB() {
-        Player player = new Player();
-
-        // hacer que entre al primer if (hacer que imageURL sea null) (no sé cómo)
-
-        assertThrows(
-                IllegalStateException.class,
-                () -> new Player()
-        );
+        // camino imposible. La inicialización de la imagen se hace desde el constructor, y además no tengo manera de
+        // cambiar la imagen ya que se declara dentro del método initPlayer()
     }
 
 }
