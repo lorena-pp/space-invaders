@@ -64,7 +64,7 @@ public class AlienBlackTest {
 
     @ParameterizedTest
     @MethodSource("validAssignmentsProvider")
-    void CreacionAlien_AsignacionCorrecta(int x, int y) {
+    void creacionAlien_AsignacionCorrecta(int x, int y) {
         Alien alien = new Alien(x, y);
 
         boolean asignacionCorrecta = alien.getX() == x && alien.getY() == y;
@@ -76,7 +76,7 @@ public class AlienBlackTest {
 
     @ParameterizedTest
     @MethodSource("invalidAssignmentsProvider")
-    void CreacionAlien_AsignacionIncorrecta(int assignedX, int assignedY, int expectedX, int expectedY) {
+    void creacionAlien_AsignacionIncorrecta(int assignedX, int assignedY, int expectedX, int expectedY) {
         Alien alien = new Alien(assignedX, assignedY);
 
         boolean asignacionCorrecta = alien.getX() == assignedX && alien.getY() == assignedY;

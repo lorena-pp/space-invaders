@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BombWhiteTest {
 
     @Test
-    public void initBombCaminoA() {
+    public void initBomb_CaminoA() {
         Alien alien = new Alien(Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y);
         Alien.Bomb bomb = alien.new Bomb(Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y);
 
@@ -17,7 +17,7 @@ public class BombWhiteTest {
     }
 
     @Test
-    public void initBombCaminoB() {
+    public void initBomb_CaminoB() {
         Alien alien = new Alien(AlienBlackTest.X_MAX_MAS, Commons.ALIEN_INIT_Y);
         Alien.Bomb bomb = alien.new Bomb(AlienBlackTest.X_MAX_MAS, Commons.ALIEN_INIT_Y);
 
@@ -26,7 +26,7 @@ public class BombWhiteTest {
     }
 
     @Test
-    public void initBombCaminoC() {
+    public void initBomb_CaminoC() {
         Alien alien = new Alien(Commons.ALIEN_INIT_X, AlienBlackTest.Y_MAX_MAS);
         Alien.Bomb bomb = alien.new Bomb(Commons.ALIEN_INIT_X, AlienBlackTest.Y_MAX_MAS);
 
