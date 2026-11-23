@@ -8,8 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AlienBlackTest {
 
@@ -31,59 +30,49 @@ public class AlienBlackTest {
 
     static Stream<Arguments> validAssignmentsProvider() {
         return Stream.of(
-                Arguments.of(X_NOMINAL, Y_NOMINAL),
+                Arguments.of("CN-01", X_NOMINAL, Y_NOMINAL),
 
-                Arguments.of(X_NOMINAL, Y_MIN),
-                Arguments.of(X_NOMINAL, Y_MIN_MAS),
-                Arguments.of(X_NOMINAL, Y_MAX_MENOS),
-                Arguments.of(X_NOMINAL, Y_MAX),
+                Arguments.of("CN-02", X_NOMINAL, Y_MIN),
+                Arguments.of("CN-03", X_NOMINAL, Y_MIN_MAS),
+                Arguments.of("CN-04", X_NOMINAL, Y_MAX_MENOS),
+                Arguments.of("CN-05", X_NOMINAL, Y_MAX),
 
-                Arguments.of(X_MIN, Y_NOMINAL),
-                Arguments.of(X_MIN_MAS, Y_NOMINAL),
-                Arguments.of(X_MAX_MENOS, Y_NOMINAL),
-                Arguments.of(X_MAX, Y_NOMINAL)
+                Arguments.of("CN-06", X_MIN, Y_NOMINAL),
+                Arguments.of("CN-07", X_MIN_MAS, Y_NOMINAL),
+                Arguments.of("CN-08", X_MAX_MENOS, Y_NOMINAL),
+                Arguments.of("CN-09", X_MAX, Y_NOMINAL)
         );
     }
 
     static Stream<Arguments> invalidAssignmentsProvider() {
         return Stream.of(
-                Arguments.of(X_NOMINAL, Y_MIN_MENOS, X_NOMINAL, Y_MIN),
-                Arguments.of(X_NOMINAL, Y_MAX_MAS, X_NOMINAL, Y_MAX),
+                Arguments.of("CN-10", X_NOMINAL, Y_MIN_MENOS, X_NOMINAL, Y_MIN),
+                Arguments.of("CN-11", X_NOMINAL, Y_MAX_MAS, X_NOMINAL, Y_MAX),
 
-                Arguments.of(X_MIN_MENOS, Y_NOMINAL, X_MIN, Y_NOMINAL),
-                Arguments.of(X_MAX_MAS, Y_NOMINAL, X_MAX, Y_NOMINAL)
+                Arguments.of("CN-12", X_MIN_MENOS, Y_NOMINAL, X_MIN, Y_NOMINAL),
+                Arguments.of("CN-13", X_MAX_MAS, Y_NOMINAL, X_MAX, Y_NOMINAL)
         );
     }
 
-    private static boolean esPosicionValida(int x, int y) {
-        boolean ejeXCorrecto = x >= X_MIN && x <= X_MAX;
-        boolean ejeYCorrecto = y >= Y_MIN && y <= Y_MAX;
-
-        return ejeXCorrecto && ejeYCorrecto;
-    }
-
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}: entrada=({1}, {2}) -> esperado=({1}, {2})")
     @MethodSource("validAssignmentsProvider")
-    void creacionAlien_AsignacionCorrecta(int x, int y) {
+    void creacionAlien_AsignacionCorrecta(String id, int x, int y) {
         Alien alien = new Alien(x, y);
 
-        boolean asignacionCorrecta = alien.getX() == x && alien.getY() == y;
-        boolean posicionValida = esPosicionValida(x, y);
-
-        assertTrue(asignacionCorrecta, "Alien should be in the assigned position");
-        assertTrue(posicionValida, "Alien's actual position should be valid");
+        assertEquals(alien.getX(), x);
+        assertEquals(alien.getY(), y);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}: entrada=({1}, {2}) -> esperado=({3}, {4})")
     @MethodSource("invalidAssignmentsProvider")
-    void creacionAlien_AsignacionIncorrecta(int assignedX, int assignedY, int expectedX, int expectedY) {
+    void creacionAlien_AsignacionIncorrecta(String id, int assignedX, int assignedY, int expectedX, int expectedY) {
         Alien alien = new Alien(assignedX, assignedY);
 
-        boolean asignacionCorrecta = alien.getX() == assignedX && alien.getY() == assignedY;
-        boolean posicionCorrectaYEsperada = esPosicionValida(alien.getX(), alien.getY()) && alien.getX() == expectedX && alien.getY() == expectedY;
+        assertNotEquals(alien.getX(), assignedX);
+        assertNotEquals(alien.getY(), assignedY);
 
-        assertFalse(asignacionCorrecta, "Alien should NOT be in the assigned position");
-        assertTrue(posicionCorrectaYEsperada, "Alien position should be correct");
+        assertEquals(alien.getX(), expectedX);
+        assertEquals(alien.getY(), expectedY);
     }
 
     @Test
