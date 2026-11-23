@@ -107,11 +107,4 @@ public class PlayerWhiteTest {
         assertEquals(Commons.BOARD_WIDTH / 2, player.getX());
         assertEquals(Commons.GROUND - 10, player.getY());
     }
-
-    @Test
-    void initPlayer_CaminoB() {
-        // camino imposible. La inicialización de la imagen se hace desde el constructor, y además no tengo manera de
-        // cambiar la imagen ya que se declara dentro del método initPlayer()
-    }
-
 }
