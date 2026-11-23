@@ -18,7 +18,7 @@ public class BombBlackTest {
     public class BombStandardTests {
 
         @Test
-        public void creacionBombCorrectoEstado() {
+        public void creacionBomb_CorrectoEstado() {
             int valorX = Commons.BOARD_WIDTH;
             int valorY = Commons.ALIEN_INIT_Y;
 
@@ -48,7 +48,7 @@ public class BombBlackTest {
 
         @ParameterizedTest(name = "Bomba pos X:{0} Y:{1}")
         @MethodSource("data")
-        public void BVT_creacionBombaPosicionCorrectaParametrizada(int valorX, int valorY) {
+        public void BVT_creacionBomba_PosicionCorrecta_Parametrizada(int valorX, int valorY) {
             Alien alien = new Alien(Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y);
             Alien.Bomb bomb = alien.new Bomb(valorX, valorY);
             boolean posicionCorrecta = bomb.getX() == valorX && bomb.getY() == valorY;

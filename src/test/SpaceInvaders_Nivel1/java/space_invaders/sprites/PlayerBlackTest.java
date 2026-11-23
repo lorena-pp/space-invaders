@@ -25,7 +25,7 @@ public class PlayerBlackTest {
     public class PlayerStandardTests {
 
         @Test
-        public void CE_creacionPlayerPosicionCorrecta_valoresNominales() {
+        public void CE_creacionPlayer_PosicionCorrecta_valoresNominales() {
             int valorY = Commons.GROUND - 10;
 
             Player player = new Player();
@@ -82,7 +82,7 @@ public class PlayerBlackTest {
 
         @ParameterizedTest(name = "keyPressed X:{0} Tecla:{1} -> Esperado X:{2}")
         @MethodSource("data")
-        public void BVT_keyPressedParametrizado(int valorInicX, int keyCode, int expectedX, String mensaje) {
+        public void BVT_keyPressed_Parametrizado(int valorInicX, int keyCode, int expectedX, String mensaje) {
             Board board = new Board();
             KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                     0, keyCode, KeyEvent.CHAR_UNDEFINED);
@@ -107,7 +107,7 @@ public class PlayerBlackTest {
 
         @ParameterizedTest(name = "keyReleased Tecla:{0}")
         @MethodSource("data")
-        public void CE_keyReleased_valoresNominalesParametrizado(int keyCode) {
+        public void CE_keyReleased_valoresNominales_Parametrizado(int keyCode) {
             int valorInicX = Commons.BOARD_WIDTH / 2;
             Board board = new Board();
             KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_RELEASED, System.currentTimeMillis(),

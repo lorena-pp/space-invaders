@@ -21,7 +21,7 @@ public class BoardBlackTest {
     public class GameInitStandardTests {
 
         @Test
-        public void creacionBoardTest() {
+        public void creacionBoard() {
             Board board = new Board();
             assertNotNull(board, "El tablero debe crearse correctamente");
         }
@@ -184,7 +184,7 @@ public class BoardBlackTest {
 
         @ParameterizedTest(name = "{0}")
         @MethodSource("data")
-        public void testUpdateBombColisiones(String testName, int bombStartX, int bombStartY, int playerX, int playerY,
+        public void updateBombColisiones(String testName, int bombStartX, int bombStartY, int playerX, int playerY,
                                              boolean expectedBombDestroyed, boolean expectedPlayerDying, boolean expectMoveDown) throws Exception {
             Board board = new Board();
 
@@ -241,7 +241,7 @@ public class BoardBlackTest {
 
         @ParameterizedTest(name = "{0}")
         @MethodSource("data")
-        public void testUpdateShotsColisiones(String testName, int shotStartX, int shotStartY, int alienX, int alienY,
+        public void updateShotsColisiones(String testName, int shotStartX, int shotStartY, int alienX, int alienY,
                                               boolean expectedShotDying, boolean expectedAlienDying,
                                               boolean expectDeathsIncrement, boolean expectMoveUp) throws Exception {
             Board board = new Board();
