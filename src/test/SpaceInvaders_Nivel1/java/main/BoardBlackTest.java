@@ -17,9 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardBlackTest {
 
-    // ==============================================================================
-    // 1. TESTS ESTÁNDAR (Ejecución única)
-    // ==============================================================================
     @Nested
     public class GameInitStandardTests {
 
@@ -41,9 +38,6 @@ public class BoardBlackTest {
         }
     }
 
-    // ==============================================================================
-    // 2. TESTS PARAMETRIZADOS: gameInit() -> Posiciones de los Aliens (BVT)
-    // ==============================================================================
     @Nested
     public class GameInitAliensParameterizedTest {
 
@@ -77,9 +71,6 @@ public class BoardBlackTest {
         }
     }
 
-    // ==============================================================================
-// 3. TESTS PARAMETRIZADOS: update() -> Condición de victoria (BVT)
-// ==============================================================================
     @Nested
     public class UpdateVictoryParameterizedTest {
 
@@ -117,9 +108,6 @@ public class BoardBlackTest {
         }
     }
 
-    // ==============================================================================
-// 4. TESTS PARAMETRIZADOS: update_aliens() -> Movimiento y bordes (BVT)
-// ==============================================================================
     @Nested
     public class UpdateAliensParameterizedTest {
 
@@ -174,9 +162,6 @@ public class BoardBlackTest {
         }
     }
 
-    // ==============================================================================
-// 5. TESTS PARAMETRIZADOS: update_bomb() -> Movimiento y Colisiones (Decision Tables + BVT)
-// ==============================================================================
     @Nested
     public class UpdateBombParameterizedTest {
 
@@ -203,14 +188,12 @@ public class BoardBlackTest {
                                              boolean expectedBombDestroyed, boolean expectedPlayerDying, boolean expectMoveDown) throws Exception {
             Board board = new Board();
 
-            // 1. Configurar Jugador
             Player player = new Player();
             player.setX(playerX);
             player.setY(playerY);
             player.setDying(false);
             board.setPlayer(player);
 
-            // 2. Configurar Alien y su Bomba interna
             Alien alien = new Alien(bombStartX, bombStartY);
             Alien.Bomb bomb = alien.getBomb();
             bomb.setX(bombStartX);
@@ -221,12 +204,10 @@ public class BoardBlackTest {
             aliens.add(alien);
             board.setAliens(aliens);
 
-            // 3. Ejecutar update_bomb()
             Method updateBombMethod = Board.class.getDeclaredMethod("update_bomb");
             updateBombMethod.setAccessible(true);
             updateBombMethod.invoke(board);
 
-            // 4. Afirmaciones basadas en la Tabla de Decisión
             assertEquals(expectedPlayerDying, player.isDying(),
                     "La condición isDying del jugador no coincide con la regla de colisión");
 
@@ -241,9 +222,6 @@ public class BoardBlackTest {
         }
     }
 
-    // ==============================================================================
-// 6. TESTS PARAMETRIZADOS: update_shots() -> Movimiento y Colisiones (Decision Tables + BVT)
-// ==============================================================================
     @Nested
     public class UpdateShotsParameterizedTest {
 
@@ -253,13 +231,10 @@ public class BoardBlackTest {
             int A_Y = 100;
 
             return Stream.of(
-                    // REGLA 1 (Nominal): El disparo sube libremente, lejos de los límites y del alien.
                     Arguments.of("Regla 1: Disparo libre asciende", A_X + 50, A_Y + 50, A_X, A_Y, false, false, false, true),
 
-                    // REGLA 2 (Borde Superior): El disparo alcanza el límite superior de la pantalla.
                     Arguments.of("Regla 2: Disparo sale del tablero", A_X, TOP_LIMIT, A_X, A_Y, true, false, false, false),
 
-                    // REGLA 3 (Borde Alien): El disparo colisiona con las coordenadas del alien.
                     Arguments.of("Regla 3: Disparo impacta al alien", A_X, A_Y, A_X, A_Y, true, true, true, false)
             );
         }
@@ -271,7 +246,6 @@ public class BoardBlackTest {
                                               boolean expectDeathsIncrement, boolean expectMoveUp) throws Exception {
             Board board = new Board();
 
-            // 1. Configurar Alien
             Alien alien = new Alien(alienX, alienY);
             alien.setDying(false);
 
@@ -279,21 +253,17 @@ public class BoardBlackTest {
             aliens.add(alien);
             board.setAliens(aliens);
 
-            // 2. Configurar Disparo (Shot)
             space_invaders.sprites.Shot shot = new space_invaders.sprites.Shot(shotStartX, shotStartY);
             shot.setDying(false);
             board.setShot(shot);
 
-            // 3. Configurar Muertes iniciales (Deaths)
             board.setDeaths(0);
             board.setInGame(true);
 
-            // 4. Ejecutar update_shots()
             Method updateShotsMethod = Board.class.getDeclaredMethod("update_shots");
             updateShotsMethod.setAccessible(true);
             updateShotsMethod.invoke(board);
 
-            // 5. Afirmaciones basadas en la Tabla de Decisión
             int actualDeaths = board.getDeaths();
 
             assertEquals(expectedAlienDying, alien.isDying(),

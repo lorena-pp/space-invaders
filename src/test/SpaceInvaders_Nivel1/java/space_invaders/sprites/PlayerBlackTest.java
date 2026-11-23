@@ -2,6 +2,7 @@ package space_invaders.sprites;
 
 import main.Board;
 import main.Commons;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,155 +21,103 @@ public class PlayerBlackTest {
 
     public static final int X_CENTRO = Commons.BOARD_WIDTH / 2;
 
-    static Stream<Arguments> actMovementProvider() {
-        return Stream.of(
-                Arguments.of(X_CENTRO, MOV_IZQUIERDA, X_CENTRO + MOV_IZQUIERDA, "Player should be moved to the left"),
-                Arguments.of(X_CENTRO, SIN_MOV, X_CENTRO + SIN_MOV, "Player should not be moved"),
-                Arguments.of(X_CENTRO, MOV_DERECHA, X_CENTRO + MOV_DERECHA, "Player should move to the right"),
+    @Nested
+    public class PlayerStandardTests {
 
-                Arguments.of(AlienBlackTest.X_MIN, MOV_IZQUIERDA, AlienBlackTest.X_MIN, "Player should stay in the left corner"),
-                Arguments.of(AlienBlackTest.X_MAX, MOV_DERECHA, AlienBlackTest.X_MAX, "Player should stay in the right corner")
-        );
+        @Test
+        public void CE_creacionPlayerPosicionCorrecta_valoresNominales() {
+            int valorY = Commons.GROUND - 10;
+
+            Player player = new Player();
+            boolean posicionCorrecta = player.getX() == X_CENTRO && player.getY() == valorY;
+
+            assertTrue(posicionCorrecta, "Player should be in the correct position");
+        }
     }
+    @Nested
+    public class PlayerActParameterizedTest {
 
-    @Test
-    void CE_creacionPlayerPosicionCorrecta_valoresNominales() {
-        int valorY = Commons.GROUND - 10; // el enunciado dice que está 10 píxeles por encima del ground
+        public static Stream<Arguments> data() {
+            return Stream.of(
+                    Arguments.of(X_CENTRO, MOV_IZQUIERDA, X_CENTRO + MOV_IZQUIERDA, "Player should be moved to the left"),
+                    Arguments.of(X_CENTRO, SIN_MOV, X_CENTRO + SIN_MOV, "Player should not be moved"),
+                    Arguments.of(X_CENTRO, MOV_DERECHA, X_CENTRO + MOV_DERECHA, "Player should move to the right"),
 
-        Player player = new Player();
-        boolean posicionCorrecta = player.getX() == X_CENTRO && player.getY() == valorY;
+                    Arguments.of(AlienBlackTest.X_MIN, MOV_IZQUIERDA, AlienBlackTest.X_MIN, "Player should stay in the left corner"),
+                    Arguments.of(AlienBlackTest.X_MAX, MOV_DERECHA, AlienBlackTest.X_MAX, "Player should stay in the right corner")
+            );
+        }
 
-        assertTrue(posicionCorrecta, "Player should be in the correct position");
+        @ParameterizedTest(name = "act() X:{0} DX:{1} -> Esperado X:{2}")
+        @MethodSource("data")
+        public void TD_act_movimientoYLimites(int valorX, int valorDX, int expectedX, String mensaje) {
+            Player player = new Player();
+            player.setX(valorX);
+            player.dx = valorDX;
+
+            player.act();
+
+            boolean posicionActualizada = player.getX() == expectedX;
+
+            assertTrue(posicionActualizada, mensaje);
+        }
     }
+    @Nested
+    public class PlayerKeyPressedParameterizedTest {
 
-    @ParameterizedTest
-    @MethodSource("actMovementProvider")
-    void TD_act_movimientoYLimites(int valorX, int valorDX, int expectedX, String mensaje) {
-        Player player = new Player();
-        player.setX(valorX);
-        player.dx = valorDX;
+        public static Stream<Arguments> data() {
+            int xCentro = Commons.BOARD_WIDTH / 2;
+            int xExtremoDerPar = Commons.BOARD_WIDTH - Commons.PLAYER_WIDTH;
+            int xExtremoDerImpar = Commons.BOARD_WIDTH - Commons.PLAYER_WIDTH - 1;
 
-        player.act();
+            return Stream.of(
+                    Arguments.of(xCentro, KeyEvent.VK_RIGHT, xCentro + 2, "Player se ha movido a la derecha en 1 unidad"),
+                    Arguments.of(xCentro, KeyEvent.VK_LEFT, xCentro - 2, "Player se ha movido a la izquierda en 1 unidad"),
+                    Arguments.of(xExtremoDerPar, KeyEvent.VK_RIGHT, xExtremoDerPar, "Player no se ha movido a la derecha"),
+                    Arguments.of(0, KeyEvent.VK_LEFT, 0, "Player no se ha movido a la izquierda"),
+                    Arguments.of(xExtremoDerImpar, KeyEvent.VK_RIGHT, xExtremoDerImpar, "Player no se ha movido a la derecha"),
+                    Arguments.of(1, KeyEvent.VK_LEFT, 1, "Player no se ha movido a la izquierda")
+            );
+        }
 
-        boolean posicionActualizada = player.getX() == expectedX;
+        @ParameterizedTest(name = "keyPressed X:{0} Tecla:{1} -> Esperado X:{2}")
+        @MethodSource("data")
+        public void BVT_keyPressedParametrizado(int valorInicX, int keyCode, int expectedX, String mensaje) {
+            Board board = new Board();
+            KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
+                    0, keyCode, KeyEvent.CHAR_UNDEFINED);
 
-        assertTrue(posicionActualizada, mensaje);
+            board.getPlayer().setX(valorInicX);
+            board.getPlayer().keyPressed(keyEvent);
+            board.getPlayer().act();
+
+            boolean resultadoCorrecto = expectedX == board.getPlayer().getX();
+            assertTrue(resultadoCorrecto, mensaje);
+        }
     }
+    @Nested
+    public class PlayerKeyReleasedParameterizedTest {
 
-    @Test
-    void BVT_keyPressedDerecha_valoresNominales() {
-        int valorInicX = Commons.BOARD_WIDTH / 2;
-        Board board = new Board();
-        KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
-                0, KeyEvent.VK_RIGHT, KeyEvent.CHAR_UNDEFINED);
+        public static Stream<Arguments> data() {
+            return Stream.of(
+                    Arguments.of(KeyEvent.VK_RIGHT),
+                    Arguments.of(KeyEvent.VK_LEFT)
+            );
+        }
 
-        board.getPlayer().keyPressed(keyEvent);
-        board.getPlayer().act();
+        @ParameterizedTest(name = "keyReleased Tecla:{0}")
+        @MethodSource("data")
+        public void CE_keyReleased_valoresNominalesParametrizado(int keyCode) {
+            int valorInicX = Commons.BOARD_WIDTH / 2;
+            Board board = new Board();
+            KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_RELEASED, System.currentTimeMillis(),
+                    0, keyCode, KeyEvent.CHAR_UNDEFINED);
 
-        boolean seMueveBien = valorInicX + 2 == board.getPlayer().getX();
-        assertTrue(seMueveBien, "Player se ha movido a la derecha en 1 unidad");
-    }
+            board.getPlayer().keyReleased(keyEvent);
+            board.getPlayer().act();
 
-    @Test
-    void BVT_keyPressedIzquierda_valoresNominales() { //HAY QUE CAMBIAR EL TEST PARA QUE USE EL PLAYER DE BOARD
-        int valorInicX = Commons.BOARD_WIDTH / 2;
-        Board board = new Board();
-        KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
-                0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
-
-        board.getPlayer().keyPressed(keyEvent);
-        board.getPlayer().act();
-
-        boolean seMueveBien = valorInicX - 2 == board.getPlayer().getX();
-        assertTrue(seMueveBien, "Player se ha movido a la izquierda en 1 unidad");
-    }
-
-    @Test
-    void BVT_keyPressedDerecha_ExtremoDerecho_PixelesPares() {
-        int valorInicX = Commons.BOARD_WIDTH - Commons.PLAYER_WIDTH;
-        Board board = new Board();
-        KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
-                0, KeyEvent.VK_RIGHT, KeyEvent.CHAR_UNDEFINED);
-
-        board.getPlayer().setX(valorInicX);
-        board.getPlayer().keyPressed(keyEvent);
-        board.getPlayer().act();
-
-        boolean noSeMueve = valorInicX == board.getPlayer().getX();
-        assertTrue(noSeMueve, "Player no se ha movido a la derecha");
-    }
-
-    @Test
-    void BVT_keyPressedIzquierda_ExtremoIzquierdo_PixelesPares() {
-        int valorInicX = 0;
-        Board board = new Board();
-        KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
-                0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
-
-        board.getPlayer().setX(valorInicX);
-        board.getPlayer().keyPressed(keyEvent);
-        board.getPlayer().act();
-
-        boolean noSeMueve = valorInicX == board.getPlayer().getX();
-        assertTrue(noSeMueve, "Player no se ha movido a la izquierda");
-    }
-
-    @Test
-    void BVT_keyPressedDerecha_ExtremoDerecho_PixelesImpares() {
-        int valorInicX = Commons.BOARD_WIDTH - Commons.PLAYER_WIDTH - 1;
-        Board board = new Board();
-        KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
-                0, KeyEvent.VK_RIGHT, KeyEvent.CHAR_UNDEFINED);
-
-        board.getPlayer().setX(valorInicX);
-        board.getPlayer().keyPressed(keyEvent);
-        board.getPlayer().act();
-
-        boolean noSeMueve = valorInicX == board.getPlayer().getX();
-        assertTrue(noSeMueve, "Player no se ha movido a la derecha");
-    }
-
-    @Test
-    void BVT_keyPressedIzquierda_ExtremoIzquierdo_PixelesImpares() {
-        int valorInicX = 1;
-        Board board = new Board();
-        KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
-                0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
-
-        board.getPlayer().setX(valorInicX);
-        board.getPlayer().keyPressed(keyEvent);
-        board.getPlayer().act();
-
-        boolean noSeMueve = valorInicX == board.getPlayer().getX();
-        assertTrue(noSeMueve, "Player no se ha movido a la izquierda");
-    }
-
-
-    @Test
-    void CE_keyReleasedDerecha_valoresNominales() {
-        int valorInicX = Commons.BOARD_WIDTH / 2;
-        Board board = new Board();
-        KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_RELEASED, System.currentTimeMillis(),
-                0, KeyEvent.VK_RIGHT, KeyEvent.CHAR_UNDEFINED);
-
-        board.getPlayer().keyReleased(keyEvent);
-        board.getPlayer().act();
-
-        boolean respuesta = valorInicX == board.getPlayer().getX();
-        assertTrue(respuesta, "Release correcto");
-    }
-
-    @Test
-    void CE_keyReleasedIzquierda_valoresNominales() {
-        int valorInicX = Commons.BOARD_WIDTH / 2;
-        Board board = new Board();
-        KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_RELEASED, System.currentTimeMillis(),
-                0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
-
-        board.getPlayer().keyReleased(keyEvent);
-        board.getPlayer().act();
-
-        boolean respuesta = valorInicX == board.getPlayer().getX();
-        assertTrue(respuesta, "Release correcto");
+            boolean respuesta = valorInicX == board.getPlayer().getX();
+            assertTrue(respuesta, "Release correcto");
+        }
     }
 }

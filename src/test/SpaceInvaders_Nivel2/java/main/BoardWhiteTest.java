@@ -268,7 +268,6 @@ public class BoardWhiteTest {
         Method updateMethod = Board.class.getDeclaredMethod("update_bomb");
         updateMethod.setAccessible(true);
 
-        // Iteramos hasta que generator.nextInt(15) == Commons.CHANCE dispare la bomba
         int intentos = 0;
         while (bomb.isDestroyed() && intentos < 200) {
             updateMethod.invoke(board);
