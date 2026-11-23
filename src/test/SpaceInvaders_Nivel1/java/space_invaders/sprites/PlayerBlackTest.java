@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.awt.event.KeyEvent;
+import java.lang.reflect.Field;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -56,10 +57,13 @@ public class PlayerBlackTest {
 
         @ParameterizedTest(name = " {0}: act() X:{1} DX:{2} -> Esperado X:{3}")
         @MethodSource("data")
-        public void TD_act_movimientoYLimites(int valorX, int valorDX, int expectedX, String mensaje) {
+        public void TD_act_movimientoYLimites(String id, int valorX, int valorDX, int expectedX, String mensaje) throws NoSuchFieldException, IllegalAccessException {
             Player player = new Player();
             player.setX(valorX);
-            player.dx = valorDX;
+
+            Field dxField = Sprite.class.getDeclaredField("dx");
+            dxField.setAccessible(true);
+            dxField.setInt(player, valorDX);
 
             player.act();
 
