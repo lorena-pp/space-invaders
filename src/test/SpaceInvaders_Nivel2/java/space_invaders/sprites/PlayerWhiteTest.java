@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class PlayerWhiteTest {
 
     @Test
-    void keypressedTestCaminoA() { //NO SE HA HECHO NINGÚN CASO DE USO PARA EL NODO 2
+    void keypressedTestCaminoA() {
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                 0, KeyEvent.VK_SPACE, KeyEvent.CHAR_UNDEFINED);
