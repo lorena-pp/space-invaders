@@ -1,10 +1,12 @@
 package space_invaders.sprites;
 
 import main.Commons;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Nested;
 
 import java.util.stream.Stream;
 
@@ -75,56 +77,46 @@ public class AlienBlackTest {
         assertEquals(alien.getY(), expectedY);
     }
 
-    @Test
-    public void TD_AlienNoSeMueve() {
-        int valorX = Commons.ALIEN_INIT_X;
-        int valorY = Commons.ALIEN_INIT_Y;
-        int direccion = 0;
-
-        Alien alien = new Alien(valorX, valorY);
-        alien.act(direccion);
-
-        boolean posicionCorrecta = alien.getX() == valorX;
-        assertTrue(posicionCorrecta, "Alien no se mueve");
+    static Stream<Arguments> alienNoSeMueveProvider() {
+        return Stream.of(
+                // Dirección neutra en posición inicial
+                Arguments.of("CN-14", Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y, 0),
+                // Intento de movimiento fuera del límite izquierdo
+                Arguments.of("CN-15", X_MIN, Commons.ALIEN_INIT_Y, -2),
+                // Intento de movimiento fuera del límite derecho
+                Arguments.of("CN-16", X_MAX, Commons.ALIEN_INIT_Y, 2)
+        );
     }
 
-    @Test
-    public void TD_AlienSeMueve() {
-        int valorX = Commons.ALIEN_INIT_X;
-        int valorY = Commons.ALIEN_INIT_Y;
-        int direccion = 2;
-
-        Alien alien = new Alien(valorX, valorY);
-        alien.act(direccion);
-
-        boolean posicionCorrecta = alien.getX() == valorX + 2;
-        assertTrue(posicionCorrecta, "Alien se mueve");
+    static Stream<Arguments> alienSeMueveProvider() {
+        return Stream.of(
+                Arguments.of("CN-17", Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y, 2),
+                Arguments.of("CN-18", Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y, -2)
+        );
     }
 
-    @Test
-    public void TD_AlienNoSeMueveIzquierda() {
-        int valorX = 0;
-        int valorY = Commons.ALIEN_INIT_Y;
-        int direccion = -2;
-
+    @ParameterizedTest(name = "{0}: x={1}, y={2}, dir={3}")
+    @MethodSource("alienNoSeMueveProvider")
+    void moverAlien_NoSeMueve(String id, int valorX, int valorY, int direccion) {
         Alien alien = new Alien(valorX, valorY);
-        alien.act(direccion);
+        int xAntes = alien.getX();
 
-        boolean posicionCorrecta = alien.getX() == valorX;
-        assertTrue(posicionCorrecta, "Alien no se mueve");
+        alien.act(direccion);
+        int xDespues = alien.getX();
+
+        assertEquals(xAntes, xDespues);
     }
 
-    @Test
-    public void TD_AlienNoSeMueveDerecha() {
-        int valorX = Commons.BOARD_WIDTH - Commons.ALIEN_WIDTH;
-        int valorY = Commons.ALIEN_INIT_Y;
-        int direccion = 2;
-
+    @ParameterizedTest(name = "{0}: x={1}, y={2}, dir={3}")
+    @MethodSource("alienSeMueveProvider")
+    void moverAlien_seMueve(String id, int valorX, int valorY, int direccion) {
         Alien alien = new Alien(valorX, valorY);
-        alien.act(direccion);
+        int xAntes = alien.getX();
 
-        boolean posicionCorrecta = alien.getX() == valorX;
-        assertTrue(posicionCorrecta, "Alien no se mueve");
+        alien.act(direccion);
+        int xDespues = alien.getX();
+
+        assertEquals(xAntes + direccion, xDespues);
     }
 
 }
