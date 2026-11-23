@@ -125,7 +125,7 @@ public class PlayerBlackTest {
             board.getPlayer().act();
 
             boolean respuesta = valorInicX == board.getPlayer().getX();
-            assertTrue(respuesta, "Release correcto");
+            assertTrue(respuesta, "Release incorrecto");
         }
     }
 }
