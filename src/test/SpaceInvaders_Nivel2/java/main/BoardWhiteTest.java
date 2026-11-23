@@ -383,7 +383,7 @@ public class BoardWhiteTest {
 
         Alien.Bomb bomb = alien.getBomb();
         bomb.setX(alien.getX());
-        bomb.setY((Commons.GROUND - Commons.BOMB_HEIGHT) * Commons.BOMB_SPEED + 10); // Valor alto para entrar en nodo 12
+        bomb.setY((Commons.GROUND - Commons.BOMB_HEIGHT) * Commons.BOMB_SPEED + 10);
         bomb.setDestroyed(false);
 
         Method updateMethod = Board.class.getDeclaredMethod("update_bomb");
