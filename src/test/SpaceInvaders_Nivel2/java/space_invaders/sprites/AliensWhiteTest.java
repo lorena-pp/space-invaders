@@ -17,34 +17,34 @@ public class AliensWhiteTest {
 
     @Test
     public void initAliensCaminoB() {
-        Alien alien = new Alien(AlienTest.X_MAX_MAS, Commons.ALIEN_INIT_Y);
+        Alien alien = new Alien(AlienBlackTest.X_MAX_MAS, Commons.ALIEN_INIT_Y);
 
-        assertEquals(AlienTest.X_MAX, alien.getBomb().getX());
+        assertEquals(AlienBlackTest.X_MAX, alien.getBomb().getX());
         assertEquals(alien.getBomb().getY(), alien.getY());
     }
 
     @Test
     public void initAliensCaminoC() {
-        Alien alien = new Alien(AlienTest.X_MIN_MENOS, Commons.ALIEN_INIT_Y);
+        Alien alien = new Alien(AlienBlackTest.X_MIN_MENOS, Commons.ALIEN_INIT_Y);
 
-        assertEquals(AlienTest.X_MIN, alien.getBomb().getX());
+        assertEquals(AlienBlackTest.X_MIN, alien.getBomb().getX());
         assertEquals(alien.getBomb().getY(), alien.getY());
     }
 
     @Test
     public void initAliensCaminoD() {
-        Alien alien = new Alien(Commons.ALIEN_INIT_X, AlienTest.Y_MAX_MAS);
+        Alien alien = new Alien(Commons.ALIEN_INIT_X, AlienBlackTest.Y_MAX_MAS);
 
         assertEquals(alien.getBomb().getX(), alien.getX());
-        assertEquals(AlienTest.Y_MAX, alien.getBomb().getY());
+        assertEquals(AlienBlackTest.Y_MAX, alien.getBomb().getY());
     }
 
     @Test
     public void initAliensCaminoE() {
-        Alien alien = new Alien(Commons.ALIEN_INIT_X, AlienTest.Y_MIN_MENOS);
+        Alien alien = new Alien(Commons.ALIEN_INIT_X, AlienBlackTest.Y_MIN_MENOS);
 
         assertEquals(alien.getBomb().getX(), alien.getX());
-        assertEquals(AlienTest.Y_MIN, alien.getBomb().getY());
+        assertEquals(AlienBlackTest.Y_MIN, alien.getBomb().getY());
     }
 
 }
