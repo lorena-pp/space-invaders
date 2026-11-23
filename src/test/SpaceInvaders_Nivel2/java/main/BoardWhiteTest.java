@@ -419,16 +419,6 @@ public class BoardWhiteTest {
     }
 
     @Test
-    public void gameInit_CaminoA() {
-        // camino imposible
-    }
-
-    @Test
-    public void gameInit_CaminoB() {
-        // camino imposible
-    }
-
-    @Test
     public void gameInit_CaminoC() {
         Board board = new Board();
 
