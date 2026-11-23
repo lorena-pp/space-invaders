@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AliensWhiteTest {
 
     @Test
-    public void initAliensCaminoA() {
+    public void initAliens_CaminoA() {
         Alien alien = new Alien(Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y);
 
         assertEquals(alien.getBomb().getX(), alien.getX());
@@ -16,7 +16,7 @@ public class AliensWhiteTest {
     }
 
     @Test
-    public void initAliensCaminoB() {
+    public void initAliens_CaminoB() {
         Alien alien = new Alien(AlienBlackTest.X_MAX_MAS, Commons.ALIEN_INIT_Y);
 
         assertEquals(AlienBlackTest.X_MAX, alien.getBomb().getX());
@@ -24,7 +24,7 @@ public class AliensWhiteTest {
     }
 
     @Test
-    public void initAliensCaminoC() {
+    public void initAliens_CaminoC() {
         Alien alien = new Alien(AlienBlackTest.X_MIN_MENOS, Commons.ALIEN_INIT_Y);
 
         assertEquals(AlienBlackTest.X_MIN, alien.getBomb().getX());
@@ -32,7 +32,7 @@ public class AliensWhiteTest {
     }
 
     @Test
-    public void initAliensCaminoD() {
+    public void initAliens_CaminoD() {
         Alien alien = new Alien(Commons.ALIEN_INIT_X, AlienBlackTest.Y_MAX_MAS);
 
         assertEquals(alien.getBomb().getX(), alien.getX());
@@ -40,7 +40,7 @@ public class AliensWhiteTest {
     }
 
     @Test
-    public void initAliensCaminoE() {
+    public void initAliens_CaminoE() {
         Alien alien = new Alien(Commons.ALIEN_INIT_X, AlienBlackTest.Y_MIN_MENOS);
 
         assertEquals(alien.getBomb().getX(), alien.getX());

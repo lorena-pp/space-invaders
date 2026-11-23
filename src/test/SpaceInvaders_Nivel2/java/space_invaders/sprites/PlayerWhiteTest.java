@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class PlayerWhiteTest {
 
     @Test
-    void keypressedTestCaminoA() {
+    void keyPressed_CaminoA() {
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                 0, KeyEvent.VK_SPACE, KeyEvent.CHAR_UNDEFINED);
@@ -21,7 +21,7 @@ public class PlayerWhiteTest {
     }
 
     @Test
-    void keypressedTestCaminoB() {
+    void keyPressed_CaminoB() {
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                 0, KeyEvent.VK_RIGHT, KeyEvent.CHAR_UNDEFINED);
@@ -30,7 +30,7 @@ public class PlayerWhiteTest {
     }
 
     @Test
-    void keypressedTestCaminoC() {
+    void keyPressed_CaminoC() {
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                 0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
@@ -39,7 +39,7 @@ public class PlayerWhiteTest {
     }
 
     @Test
-    void keyreleasedTestCaminoA() {
+    void keyReleased_CaminoA() {
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_RELEASED, System.currentTimeMillis(),
                 0, KeyEvent.VK_SPACE, KeyEvent.CHAR_UNDEFINED);
@@ -48,7 +48,7 @@ public class PlayerWhiteTest {
     }
 
     @Test
-    void keyreleasedTestCaminoB() {
+    void keyReleased_CaminoB() {
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_RELEASED, System.currentTimeMillis(),
                 0, KeyEvent.VK_RIGHT, KeyEvent.CHAR_UNDEFINED);
@@ -57,7 +57,7 @@ public class PlayerWhiteTest {
     }
 
     @Test
-    void keyreleasedTestCaminoC() {
+    void keyReleased_CaminoC() {
         Board board = new Board();
         KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_RELEASED, System.currentTimeMillis(),
                 0, KeyEvent.VK_LEFT, KeyEvent.CHAR_UNDEFINED);
@@ -66,7 +66,7 @@ public class PlayerWhiteTest {
     }
 
     @Test
-    void actCaminoA() {
+    void act_CaminoA() {
         Player player = new Player();
 
         player.setX(Commons.BOARD_WIDTH / 2);
@@ -78,7 +78,7 @@ public class PlayerWhiteTest {
     }
 
     @Test
-    void actCaminoB() {
+    void act_CaminoB() {
         Player player = new Player();
 
         player.setX(2);
@@ -90,7 +90,7 @@ public class PlayerWhiteTest {
     }
 
     @Test
-    void actCaminoC() {
+    void act_CaminoC() {
         Player player = new Player();
 
         player.setX(Commons.BOARD_WIDTH * 2 * Commons.PLAYER_WIDTH);
@@ -102,7 +102,7 @@ public class PlayerWhiteTest {
     }
 
     @Test
-    void initPlayerCaminoA() {
+    void initPlayer_CaminoA() {
         Player player = new Player();
 
         assertEquals(Commons.BOARD_WIDTH / 2, player.getX());
@@ -110,7 +110,7 @@ public class PlayerWhiteTest {
     }
 
     @Test
-    void initPlayerCaminoB() {
+    void initPlayer_CaminoB() {
         Player player = new Player();
 
         // hacer que entre al primer if (hacer que imageURL sea null) (no sé cómo)
@@ -122,6 +122,3 @@ public class PlayerWhiteTest {
     }
 
 }
-
-
-

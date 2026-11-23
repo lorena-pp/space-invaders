@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardWhiteTest {
     @Test
-    public void updateCaminoA() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    public void update_CaminoA() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         Board testBoard = new Board();
         testBoard.setDeaths(Commons.NUMBER_OF_ALIENS_TO_DESTROY);
 
@@ -24,7 +24,7 @@ public class BoardWhiteTest {
     }
 
     @Test
-    public void updateCaminoB() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void update_CaminoB() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         testBoard.setDeaths(Commons.NUMBER_OF_ALIENS_TO_DESTROY + 1);
 
@@ -37,7 +37,7 @@ public class BoardWhiteTest {
 
 
     @Test
-    public void updateShotsCaminoA() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void updateShots_CaminoA() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         testBoard.getAliens().clear();
         var alien = new Alien(Commons.BOARD_WIDTH / 2, Commons.BOARD_HEIGHT / 2);
@@ -56,7 +56,7 @@ public class BoardWhiteTest {
     }
 
     @Test
-    public void updateShotsCaminoB() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void updateShots_CaminoB() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         testBoard.getAliens().clear();
         var alien = new Alien(Commons.BOARD_WIDTH / 2 - 50, Commons.BOARD_HEIGHT / 2 - 50);
@@ -76,7 +76,7 @@ public class BoardWhiteTest {
 
 
     @Test
-    public void updateShotsCaminoC() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void updateShots_CaminoC() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         testBoard.getAliens().clear();
         var alien = new Alien(Commons.BOARD_WIDTH / 2, Commons.BOARD_HEIGHT / 2);
@@ -95,7 +95,7 @@ public class BoardWhiteTest {
 
 
     @Test
-    public void updateShotsCaminoD() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void updateShots_CaminoD() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         testBoard.getAliens().clear();
 
@@ -111,7 +111,7 @@ public class BoardWhiteTest {
 
 
     @Test
-    public void updateShotsCaminoE() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void updateShots_CaminoE() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         testBoard.getShot().setY(Commons.BOARD_HEIGHT / 2);
         testBoard.getAliens().clear();
@@ -127,7 +127,7 @@ public class BoardWhiteTest {
     }
 
     @Test
-    public void updateShotsCaminoF() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void updateShots_CaminoF() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         int prevdeaths = testBoard.getDeaths();
         int prevpos = testBoard.getShot().getY();
@@ -156,7 +156,7 @@ public class BoardWhiteTest {
  */
 
     @Test
-    public void updateAliensCaminoA() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void updateAliens_CaminoA() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         int dirInicial = testBoard.getDirection();
         testBoard.getAliens().clear();
@@ -169,7 +169,7 @@ public class BoardWhiteTest {
     }
 
     @Test
-    public void updateAliensCaminoB() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void updateAliens_CaminoB() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         int dirInicial = testBoard.getDirection();
         testBoard.getAliens().clear();
@@ -185,7 +185,7 @@ public class BoardWhiteTest {
     }
 
     @Test
-    public void updateAliensCaminoD() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void updateAliens_CaminoD() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         int dirInicial = -1;
         testBoard.setDirection(dirInicial);
@@ -202,7 +202,7 @@ public class BoardWhiteTest {
     }
 
     @Test
-    public void updateAliensCaminoE() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void updateAliens_CaminoE() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         testBoard.getAliens().clear();
         var alien = new Alien(Commons.BOARD_WIDTH / 2, Commons.GROUND - Commons.ALIEN_HEIGHT);
@@ -216,7 +216,7 @@ public class BoardWhiteTest {
     }
 
     @Test
-    public void updateAliensCaminoF() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void updateAliens_CaminoF() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Board testBoard = new Board();
         testBoard.getAliens().clear();
         var alien = new Alien(Commons.BORDER_LEFT, Commons.GROUND * Commons.ALIEN_HEIGHT + 1);
