@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BombTest {
+public class BombBlackTest {
 
     @Nested
     public class BombStandardTests {
