@@ -90,8 +90,8 @@ public class AlienBlackTest {
 
     static Stream<Arguments> alienSeMueveProvider() {
         return Stream.of(
-                Arguments.of("CN-17", Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y, 2),
-                Arguments.of("CN-18", Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y, -2)
+                Arguments.of("CN-17", Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y, -2),
+                Arguments.of("CN-18", Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y, 2)
         );
     }
 
