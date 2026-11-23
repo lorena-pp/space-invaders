@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.awt.event.KeyEvent;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PlayerBlackTest {
@@ -74,22 +75,24 @@ public class PlayerBlackTest {
 
         public static Stream<Arguments> data() {
             int xCentro = Commons.BOARD_WIDTH / 2;
-            int xExtremoDerPar = Commons.BOARD_WIDTH - Commons.PLAYER_WIDTH;
-            int xExtremoDerImpar = Commons.BOARD_WIDTH - Commons.PLAYER_WIDTH - 1;
+            int xExtremoDerPar = AlienBlackTest.X_MAX;
+            int xExtremoDerImpar = xExtremoDerPar + 1;
+            int xExtremoIzqPar = AlienBlackTest.X_MIN;
+            int xExtremoIzqImpar = xExtremoIzqPar + 1;
 
             return Stream.of(
-                    Arguments.of("CN-38", xCentro, KeyEvent.VK_RIGHT, xCentro + 2, "Player se ha movido a la derecha en 1 unidad"),
-                    Arguments.of("CN-39", xCentro, KeyEvent.VK_LEFT, xCentro - 2, "Player se ha movido a la izquierda en 1 unidad"),
-                    Arguments.of("CN-40", xExtremoDerPar, KeyEvent.VK_RIGHT, xExtremoDerPar, "Player no se ha movido a la derecha"),
-                    Arguments.of("CN-41", 0, KeyEvent.VK_LEFT, 0, "Player no se ha movido a la izquierda"),
-                    Arguments.of("CN-42", xExtremoDerImpar, KeyEvent.VK_RIGHT, xExtremoDerImpar, "Player no se ha movido a la derecha"),
-                    Arguments.of("CN-43", 1, KeyEvent.VK_LEFT, 1, "Player no se ha movido a la izquierda")
+                    Arguments.of("CN-38", xCentro, KeyEvent.VK_RIGHT, xCentro + 2),
+                    Arguments.of("CN-39", xCentro, KeyEvent.VK_LEFT, xCentro - 2),
+                    Arguments.of("CN-40", xExtremoDerPar, KeyEvent.VK_RIGHT, xExtremoDerPar),
+                    Arguments.of("CN-41", xExtremoIzqPar, KeyEvent.VK_LEFT, xExtremoIzqPar),
+                    Arguments.of("CN-42", xExtremoDerImpar, KeyEvent.VK_RIGHT, xExtremoDerImpar),
+                    Arguments.of("CN-43", xExtremoIzqImpar, KeyEvent.VK_LEFT, xExtremoIzqImpar)
             );
         }
 
         @ParameterizedTest(name = "{0}: keyPressed X:{1} Tecla:{2} -> Esperado X:{3}")
         @MethodSource("data")
-        public void TD_keyPressed_Parametrizado(String id, int valorInicX, int keyCode, int expectedX, String mensaje) {
+        public void TD_keyPressed_Parametrizado(String id, int valorInicX, int keyCode, int expectedX) {
             Board board = new Board();
             KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                     0, keyCode, KeyEvent.CHAR_UNDEFINED);
@@ -98,8 +101,7 @@ public class PlayerBlackTest {
             board.getPlayer().keyPressed(keyEvent);
             board.getPlayer().act();
 
-            boolean resultadoCorrecto = expectedX == board.getPlayer().getX();
-            assertTrue(resultadoCorrecto, mensaje);
+            assertEquals(expectedX, board.getPlayer().getX());
         }
     }
 
