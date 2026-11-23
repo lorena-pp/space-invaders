@@ -87,7 +87,7 @@ public class PlayerBlackTest {
             );
         }
 
-        @ParameterizedTest(name = "keyPressed X:{0} Tecla:{1} -> Esperado X:{2}")
+        @ParameterizedTest(name = "{0}: keyPressed X:{1} Tecla:{2} -> Esperado X:{3}")
         @MethodSource("data")
         public void TD_keyPressed_Parametrizado(String id, int valorInicX, int keyCode, int expectedX, String mensaje) {
             Board board = new Board();
@@ -113,9 +113,9 @@ public class PlayerBlackTest {
             );
         }
 
-        @ParameterizedTest(name = "keyReleased Tecla:{0}")
+        @ParameterizedTest(name = "{0}: keyReleased Tecla:{1}")
         @MethodSource("data")
-        public void CE_keyReleased_valoresNominales_Parametrizado(int keyCode) {
+        public void CE_keyReleased_valoresNominales_Parametrizado(String id, int keyCode) {
             int valorInicX = Commons.BOARD_WIDTH / 2;
             Board board = new Board();
             KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_RELEASED, System.currentTimeMillis(),
