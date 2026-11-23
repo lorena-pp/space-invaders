@@ -78,18 +78,18 @@ public class PlayerBlackTest {
             int xExtremoDerImpar = Commons.BOARD_WIDTH - Commons.PLAYER_WIDTH - 1;
 
             return Stream.of(
-                    Arguments.of(xCentro, KeyEvent.VK_RIGHT, xCentro + 2, "Player se ha movido a la derecha en 1 unidad"),
-                    Arguments.of(xCentro, KeyEvent.VK_LEFT, xCentro - 2, "Player se ha movido a la izquierda en 1 unidad"),
-                    Arguments.of(xExtremoDerPar, KeyEvent.VK_RIGHT, xExtremoDerPar, "Player no se ha movido a la derecha"),
-                    Arguments.of(0, KeyEvent.VK_LEFT, 0, "Player no se ha movido a la izquierda"),
-                    Arguments.of(xExtremoDerImpar, KeyEvent.VK_RIGHT, xExtremoDerImpar, "Player no se ha movido a la derecha"),
-                    Arguments.of(1, KeyEvent.VK_LEFT, 1, "Player no se ha movido a la izquierda")
+                    Arguments.of("CN-38", xCentro, KeyEvent.VK_RIGHT, xCentro + 2, "Player se ha movido a la derecha en 1 unidad"),
+                    Arguments.of("CN-39", xCentro, KeyEvent.VK_LEFT, xCentro - 2, "Player se ha movido a la izquierda en 1 unidad"),
+                    Arguments.of("CN-40", xExtremoDerPar, KeyEvent.VK_RIGHT, xExtremoDerPar, "Player no se ha movido a la derecha"),
+                    Arguments.of("CN-41", 0, KeyEvent.VK_LEFT, 0, "Player no se ha movido a la izquierda"),
+                    Arguments.of("CN-42", xExtremoDerImpar, KeyEvent.VK_RIGHT, xExtremoDerImpar, "Player no se ha movido a la derecha"),
+                    Arguments.of("CN-43", 1, KeyEvent.VK_LEFT, 1, "Player no se ha movido a la izquierda")
             );
         }
 
         @ParameterizedTest(name = "keyPressed X:{0} Tecla:{1} -> Esperado X:{2}")
         @MethodSource("data")
-        public void BVT_keyPressed_Parametrizado(int valorInicX, int keyCode, int expectedX, String mensaje) {
+        public void TD_keyPressed_Parametrizado(String id, int valorInicX, int keyCode, int expectedX, String mensaje) {
             Board board = new Board();
             KeyEvent keyEvent = new KeyEvent(board, KeyEvent.KEY_PRESSED, System.currentTimeMillis(),
                     0, keyCode, KeyEvent.CHAR_UNDEFINED);
@@ -108,8 +108,8 @@ public class PlayerBlackTest {
 
         public static Stream<Arguments> data() {
             return Stream.of(
-                    Arguments.of(KeyEvent.VK_RIGHT),
-                    Arguments.of(KeyEvent.VK_LEFT)
+                    Arguments.of("CN-44", KeyEvent.VK_RIGHT),
+                    Arguments.of("CN-45", KeyEvent.VK_LEFT)
             );
         }
 
