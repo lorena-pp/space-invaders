@@ -1,5 +1,6 @@
 package main;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,12 +22,14 @@ public class BoardBlackTest {
     public class GameInitStandardTests {
 
         @Test
+        @DisplayName("CN-59")
         public void creacionBoard() {
             Board board = new Board();
             assertNotNull(board, "El tablero debe crearse correctamente");
         }
 
         @Test
+        @DisplayName("CN-60")
         public void BVT_gameInit_jugadorYDisparo_inicializados() throws Exception {
             Board board = new Board();
             Method init = Board.class.getDeclaredMethod("gameInit");
@@ -47,17 +50,17 @@ public class BoardBlackTest {
             int maxRow = Commons.ALIEN_ROWS - 1;
 
             return Stream.of(
-                    Arguments.of(0, Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y),
-                    Arguments.of(1, Commons.ALIEN_INIT_X + Commons.ALIEN_SEPARATOR, Commons.ALIEN_INIT_Y),
-                    Arguments.of(ultimoIndice,
+                    Arguments.of("CN-61", 0, Commons.ALIEN_INIT_X, Commons.ALIEN_INIT_Y),
+                    Arguments.of("CN-62", 1, Commons.ALIEN_INIT_X + Commons.ALIEN_SEPARATOR, Commons.ALIEN_INIT_Y),
+                    Arguments.of("CN-63", ultimoIndice,
                             Commons.ALIEN_INIT_X + (Commons.ALIEN_SEPARATOR * maxCol),
                             Commons.ALIEN_INIT_Y + (Commons.ALIEN_SEPARATOR * maxRow))
             );
         }
 
-        @ParameterizedTest(name = "Alien pos {0} -> Esperado X:{1} Y:{2}")
+        @ParameterizedTest(name = "{0}: Alien pos {1} -> Esperado X:{2} Y:{3}")
         @MethodSource("data")
-        public void BVT_gameInit_posicionAliensParametrizada(int alienIndex, int expectedX, int expectedY) throws Exception {
+        public void BVT_gameInit_posicionAliensParametrizada(String id, int alienIndex, int expectedX, int expectedY) throws Exception {
             Board board = new Board();
             Method init = Board.class.getDeclaredMethod("gameInit");
             init.setAccessible(true);
@@ -76,16 +79,16 @@ public class BoardBlackTest {
 
         public static Stream<Arguments> data() {
             return Stream.of(
-                    Arguments.of(-10, true, ""),
-                    Arguments.of(-1, true, ""),
-                    Arguments.of(0, false, "Game won!"),
-                    Arguments.of(1, false, "Game won!")
+                    Arguments.of("CN-64", -10, true, ""),
+                    Arguments.of("CN-65", -1, true, ""),
+                    Arguments.of("CN-66", 0, false, "Game won!"),
+                    Arguments.of("CN-67", 1, false, "Game won!")
             );
         }
 
-        @ParameterizedTest(name = "Offset muertes {0} -> Sigue jugando: {1}")
+        @ParameterizedTest(name = "{0}: Offset muertes {1} -> Sigue jugando: {2}")
         @MethodSource("data")
-        public void BVT_update_condicionDeVictoria(int offset, boolean expectedInGame, String expectedMessage) throws Exception {
+        public void BVT_update_condicionDeVictoria(String id, int offset, boolean expectedInGame, String expectedMessage) throws Exception {
             Board board = new Board();
 
             board.setInGame(true);
@@ -117,16 +120,16 @@ public class BoardBlackTest {
             int GROUND_LIMIT = Commons.GROUND - Commons.ALIEN_HEIGHT;
 
             return Stream.of(
-                    Arguments.of("Nominal: Movimiento normal derecha", 100, 50, 1, 1, false, true, ""),
-                    Arguments.of("Borde Derecho: Invierte y baja", BORDER_RIGHT, 50, 1, -1, true, true, ""),
-                    Arguments.of("Borde Izquierdo: Invierte y baja", BORDER_LEFT, 50, -1, 1, true, true, ""),
-                    Arguments.of("Límite Inferior: Invasión", 100, GROUND_LIMIT, 1, 1, false, false, "Invasion!")
+                    Arguments.of("CN-68", "Nominal: Movimiento normal derecha", 100, 50, 1, 1, false, true, ""),
+                    Arguments.of("CN-69", "Borde Derecho: Invierte y baja", BORDER_RIGHT, 50, 1, -1, true, true, ""),
+                    Arguments.of("CN-70", "Borde Izquierdo: Invierte y baja", BORDER_LEFT, 50, -1, 1, true, true, ""),
+                    Arguments.of("CN-71", "Límite Inferior: Invasión", 100, GROUND_LIMIT, 1, 1, false, false, "Invasion!")
             );
         }
 
-        @ParameterizedTest(name = "{0}")
+        @ParameterizedTest(name = "{0}: {1}")
         @MethodSource("data")
-        public void BVT_updateAliens_movimientoYLimites(String testName, int startX, int startY, int initialDirection,
+        public void BVT_updateAliens_movimientoYLimites(String id, String testName, int startX, int startY, int initialDirection,
                                                         int expectedDirection, boolean expectDrop,
                                                         boolean expectedInGame, String expectedMessage) throws Exception {
             Board board = new Board();
@@ -172,19 +175,19 @@ public class BoardBlackTest {
 
             return Stream.of(
                     // REGLA 1 (Nominal): La bomba cae libremente sin chocar.
-                    Arguments.of("Regla 1: Bomba libre desciende", 50, P_Y - 50, P_X, P_Y, false, false, true),
+                    Arguments.of("CN-72", "Regla 1: Bomba libre desciende", 50, P_Y - 50, P_X, P_Y, false, false, true),
 
                     // REGLA 2 (Borde Suelo): La bomba toca exactamente el límite inferior.
-                    Arguments.of("Regla 2: Bomba choca con el suelo", 50, GROUND_LIMIT, P_X, P_Y, true, false, false),
+                    Arguments.of("CN-73", "Regla 2: Bomba choca con el suelo", 50, GROUND_LIMIT, P_X, P_Y, true, false, false),
 
                     // REGLA 3 (Borde Player): La bomba solapa con la posición del jugador.
-                    Arguments.of("Regla 3: Bomba impacta al jugador", P_X, P_Y, P_X, P_Y, false, true, false)
+                    Arguments.of("CN-74", "Regla 3: Bomba impacta al jugador", P_X, P_Y, P_X, P_Y, false, true, false)
             );
         }
 
-        @ParameterizedTest(name = "{0}")
+        @ParameterizedTest(name = "{0}: {1}")
         @MethodSource("data")
-        public void updateBombColisiones(String testName, int bombStartX, int bombStartY, int playerX, int playerY,
+        public void updateBombColisiones(String id, String testName, int bombStartX, int bombStartY, int playerX, int playerY,
                                              boolean expectedBombDestroyed, boolean expectedPlayerDying, boolean expectMoveDown) throws Exception {
             Board board = new Board();
 
@@ -231,17 +234,17 @@ public class BoardBlackTest {
             int A_Y = 100;
 
             return Stream.of(
-                    Arguments.of("Regla 1: Disparo libre asciende", A_X + 50, A_Y + 50, A_X, A_Y, false, false, false, true),
+                    Arguments.of("CN-75", "Regla 1: Disparo libre asciende", A_X + 50, A_Y + 50, A_X, A_Y, false, false, false, true),
 
-                    Arguments.of("Regla 2: Disparo sale del tablero", A_X, TOP_LIMIT, A_X, A_Y, true, false, false, false),
+                    Arguments.of("CN-76", "Regla 2: Disparo sale del tablero", A_X, TOP_LIMIT, A_X, A_Y, true, false, false, false),
 
-                    Arguments.of("Regla 3: Disparo impacta al alien", A_X, A_Y, A_X, A_Y, true, true, true, false)
+                    Arguments.of("CN-77", "Regla 3: Disparo impacta al alien", A_X, A_Y, A_X, A_Y, true, true, true, false)
             );
         }
 
         @ParameterizedTest(name = "{0}")
         @MethodSource("data")
-        public void updateShotsColisiones(String testName, int shotStartX, int shotStartY, int alienX, int alienY,
+        public void updateShotsColisiones(String id, String testName, int shotStartX, int shotStartY, int alienX, int alienY,
                                               boolean expectedShotDying, boolean expectedAlienDying,
                                               boolean expectDeathsIncrement, boolean expectMoveUp) throws Exception {
             Board board = new Board();

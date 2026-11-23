@@ -76,7 +76,7 @@ public class PlayerBlackTest {
         public static Stream<Arguments> data() {
             int xCentro = Commons.BOARD_WIDTH / 2;
             int xExtremoDerPar = AlienBlackTest.X_MAX;
-            int xExtremoDerImpar = xExtremoDerPar + 1;
+            int xExtremoDerImpar = xExtremoDerPar - 1;
             int xExtremoIzqPar = AlienBlackTest.X_MIN;
             int xExtremoIzqImpar = xExtremoIzqPar + 1;
 
