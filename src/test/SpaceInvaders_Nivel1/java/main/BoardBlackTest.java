@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import space_invaders.sprites.Alien;
 import space_invaders.sprites.Player;
+import space_invaders.sprites.Shot;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -242,7 +243,7 @@ public class BoardBlackTest {
             );
         }
 
-        @ParameterizedTest(name = "{0}")
+        @ParameterizedTest(name = "{0}: {1}")
         @MethodSource("data")
         public void updateShotsColisiones(String id, String testName, int shotStartX, int shotStartY, int alienX, int alienY,
                                               boolean expectedShotDying, boolean expectedAlienDying,
@@ -256,7 +257,7 @@ public class BoardBlackTest {
             aliens.add(alien);
             board.setAliens(aliens);
 
-            space_invaders.sprites.Shot shot = new space_invaders.sprites.Shot(shotStartX, shotStartY);
+            Shot shot = new Shot(shotStartX, shotStartY);
             shot.setDying(false);
             board.setShot(shot);
 
