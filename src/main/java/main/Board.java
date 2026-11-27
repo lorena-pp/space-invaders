@@ -53,6 +53,11 @@ public class Board extends JPanel {
 
     private Timer timer;
 
+    public static final int X_MIN = Commons.BORDER_LEFT;
+    public static final int X_MAX = Commons.BOARD_WIDTH - Commons.BORDER_RIGHT;
+    public static final int Y_MIN = 0;
+    public static final int Y_MAX = Commons.BOARD_HEIGHT;
+
     /**
      * {@summary <span class="alert-small">⛔🧪</span> Obtiene el objeto jugador del tablero.}
      * 
