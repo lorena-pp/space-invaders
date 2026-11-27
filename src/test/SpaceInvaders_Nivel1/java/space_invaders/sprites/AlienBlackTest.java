@@ -29,7 +29,7 @@ public class AlienBlackTest {
     public static final int Y_MAX = Commons.BOARD_HEIGHT;
     public static final int Y_MAX_MENOS = Y_MAX - 1;
     public static final int Y_MAX_MAS = Y_MAX + 1;
-    public static final int MOV_DER = 2;
+    public static final int MOV_DER = 1;
     public static final int MOV_IZQ = -MOV_DER;
 
     static Stream<Arguments> creacionAlienProvider() {
