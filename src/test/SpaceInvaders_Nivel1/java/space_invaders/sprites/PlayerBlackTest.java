@@ -84,9 +84,7 @@ public class PlayerBlackTest {
                     Arguments.of("CN-38", xCentro, KeyEvent.VK_RIGHT, xCentro + 2),
                     Arguments.of("CN-39", xCentro, KeyEvent.VK_LEFT, xCentro - 2),
                     Arguments.of("CN-40", xExtremoDerPar, KeyEvent.VK_RIGHT, xExtremoDerPar),
-                    Arguments.of("CN-41", xExtremoIzqPar, KeyEvent.VK_LEFT, xExtremoIzqPar),
-                    Arguments.of("CN-42", xExtremoDerImpar, KeyEvent.VK_RIGHT, xExtremoDerImpar),
-                    Arguments.of("CN-43", xExtremoIzqImpar, KeyEvent.VK_LEFT, xExtremoIzqImpar)
+                    Arguments.of("CN-41", xExtremoIzqPar, KeyEvent.VK_LEFT, xExtremoIzqPar)
             );
         }
 

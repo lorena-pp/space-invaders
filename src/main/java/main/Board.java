@@ -303,7 +303,7 @@ public class Board extends JPanel {
      */
     private void update() {
 
-        if (deaths <= Commons.NUMBER_OF_ALIENS_TO_DESTROY) {
+        if (deaths >= Commons.NUMBER_OF_ALIENS_TO_DESTROY) { //CAMBIADO LOS CARÁCTERES "<=" POR ">="
 
             inGame = false;
             timer.stop();
@@ -367,7 +367,7 @@ public class Board extends JPanel {
             y -= Commons.SHOT_SPEED;
 
             if (y < 0) {
-                deaths++;
+                this.shot.die(); //CAMBIADO "deaths++" POR "this.shot.die()"
             } else {
                 this.shot.setY(y);
 
@@ -416,7 +416,7 @@ public class Board extends JPanel {
                 }
             }
 
-            if (x != Commons.BORDER_LEFT && direction != 1) {
+            if (x <= Commons.BORDER_LEFT && direction != 1) { //CAMBIADO LOS CARÁCTERES "!=" POR "<="
 
                 direction = 1;
 
@@ -440,7 +440,7 @@ public class Board extends JPanel {
 
                 int y = alien.getY();
 
-                if (y > Commons.GROUND * Commons.ALIEN_HEIGHT) {
+                if (y > Commons.GROUND - Commons.ALIEN_HEIGHT) { //CAMBIADO EL CARÁCTER "*" POR "-"
                     inGame = false;
                     message = "Invasion!";
                 }
@@ -515,7 +515,7 @@ public class Board extends JPanel {
 
             if (!bomb.isDestroyed()) {
 
-                bomb.setY(bomb.getY() / Commons.BOMB_SPEED);
+                bomb.setY(bomb.getY() + Commons.BOMB_SPEED); //CAMBIADO EL CARÁCTER "/" POR "+"
 
                 if (bomb.getY() >= Commons.GROUND - Commons.BOMB_HEIGHT) {
 
@@ -523,7 +523,6 @@ public class Board extends JPanel {
                 }
             }
         }
-
     }
 
     /**

@@ -141,18 +141,24 @@ public class BoardWhiteTest {
                 testBoard.getDeaths() == prevdeaths && testBoard.getShot().getY() == prevpos,
                 "El disparo es visible"
         );
-
     }
 
 
-/* ERRORES ENCONTRADOS EN UODATE_SHOTS DE PRIMERAS:
-   1 - EL DEATHS++ DE AL FINAL DEL METODO DE UPDATE SHOTS DEBERÍA SER THIS.SHOT.DIE()
+    /* ERRORES ENCONTRADOS EN UPDATE:
+   1 - LA CONDICIÓN "deaths <= Commons.NUMBER_OF_ALIENS_TO_DESTROY" DEBERÍA SER ">="
  */
 
-/* ERRORES ENCONTRADOS EN UODATE_ALIEN DE PRIMERAS:
-   1 - EN EL SEGUNDO IF, SE HACE UNA COMPROBACION "X != Commons.BORDER_LEFT" CUANDO DEBERÍAS SER <=.
-   2 - EN EL ÚLTIMO IF DEL METODO, SE HACE LA COMPROBACION "y > Commons.GROUND * Commons.ALIEN_HEIGHT"
+/* ERRORES ENCONTRADOS EN UPDATE_SHOTS:
+   1 - EL DEATHS++ DE AL FINAL DE UPDATE SHOTS DEBERÍA SER THIS.SHOT.DIE()
+ */
+
+/* ERRORES ENCONTRADOS EN UPDATE_ALIEN:
+   1 - EN EL SEGUNDO IF, SE HACE UNA COMPROBACIÓN "X != Commons.BORDER_LEFT" CUANDO DEBERÍAS SER <=.
+   2 - EN EL ÚLTIMO IF DEL METODO, SE HACE LA COMPROBACIÓN "y > Commons.GROUND * Commons.ALIEN_HEIGHT"
         CUANDO ESAS CONSTANTES DEBERÍAN RESTARSE.
+ */
+    /* ERRORES ENCONTRADOS EN UPDATE_BOMBS:
+   1 - EN LA LINEA "bomb.setY(bomb.getY() / Commons.BOMB_SPEED);", LOS VALORES DENTRO DEL SETY DEBERÍAN SUMARSE, NO DIVIDIRSE
  */
 
     @Test
@@ -426,7 +432,6 @@ public class BoardWhiteTest {
         assertEquals(Commons.ALIEN_INIT_X, primerAlien.getX());
         assertEquals(Commons.ALIEN_INIT_Y, primerAlien.getY());
 
-        // ERROR: Utiliza - en lugar de + en el cálculo de la coordenada vertical
         Alien ultimoAlien = board.getAliens().get(board.getAliens().size() - 1);
         int expectedLastX = Commons.ALIEN_INIT_X + Commons.ALIEN_SEPARATOR * (Commons.ALIEN_COLUMNS - 1);
         int expectedLastY = Commons.ALIEN_INIT_Y - Commons.ALIEN_SEPARATOR * (Commons.ALIEN_ROWS - 1);

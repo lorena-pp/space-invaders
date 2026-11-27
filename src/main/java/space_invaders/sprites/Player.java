@@ -1,5 +1,6 @@
 package space_invaders.sprites;
 
+import main.Board;
 import main.Commons;
 
 import javax.swing.ImageIcon;
@@ -82,14 +83,14 @@ public class Player extends Sprite {
 
         x += dx;
 
-        if (x <= 2) {
+        if (x <= Board.X_MIN) { //CAMBIADO EL CARÁCTER "2" POR "Board.X_MIN" PARA USAR LOS LÍMITES DEL TABLERO
 
-            x = 2;
+            x = Board.X_MIN; //CAMBIADO EL CARÁCTER "2" POR "Board.X_MIN" PARA ACTUALIZAR LA POSICIÓN A LOS LÍMITES DEL TABLERO
         }
 
-        if (x >= Commons.BOARD_WIDTH * 2 * width) {
+        if (x >= Board.X_MAX) { //CAMBIADA LA COMPROBACIÓN "x >= Commons.BOARD_WIDTH * 2 * width" POR "x >= Board.X_MAX"
 
-            x = Commons.BOARD_WIDTH - 2 * width;
+            x = Board.X_MAX; // CAMBIADA LA ACTUALIZACIÓN "x = Commons.BOARD_WIDTH - 2 * width" POR "x = Board.X_MAX"
         }
     }
 
@@ -134,7 +135,7 @@ public class Player extends Sprite {
 
         if (key == KeyEvent.VK_LEFT) {
 
-            dx = 2;
+            dx = 0; //CAMBIADO EL CARÁCTER "2" POR "0"
         }
 
         if (key == KeyEvent.VK_RIGHT) {
