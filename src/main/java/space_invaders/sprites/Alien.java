@@ -84,7 +84,15 @@ public class Alien extends Sprite {
      */
     public void act(int direction) {
 
-        this.x += direction;
+        // Cambiada la única línea de this.x += direction sin considerar la salida del tablero
+        if (this.x + direction > Board.X_MAX) {
+            this.x = Board.X_MAX;
+        } else if (this.x + direction < Board.X_MIN) {
+            this.x = Board.X_MIN;
+        } else {
+            this.x += direction;
+        }
+
     }
 
     /**
