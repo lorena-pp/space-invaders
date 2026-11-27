@@ -1,5 +1,6 @@
 package space_invaders.sprites;
 
+import main.Board;
 import main.Commons;
 
 import javax.swing.ImageIcon;
@@ -45,22 +46,23 @@ public class Alien extends Sprite {
      */
      private void initAlien(int x, int y) {
 
-        if (x> Commons.BOARD_WIDTH){
-            this.x = Commons.BOARD_WIDTH;
-        } if (x<0){
-            this.x = 0;
-        } if (y> Commons.BOARD_HEIGHT){
-            this.y = Commons.BOARD_HEIGHT;
-        } if (y<0){
-            this.y=0;
-        }
-        else
-        {
-            this.x = x;
-            this.y = y;
-        }
+         if (x > Board.X_MAX){ // Cambiado Commons.BOARD_WIDTH a X_MAX (328)
+             this.x = Board.X_MAX;
+         } else if (x < Board.X_MIN){ // Cambiado 0 por X_MIN (5) y cambiado de un if independiente a un else-if
+             this.x = Board.X_MIN;
+         } else { // Incluido el caso en el que no se salga de los bordes
+             this.x = x;
+         }
 
-        bomb = new Bomb(x, y);
+         if (y > Board.Y_MAX){
+             this.y = Board.Y_MAX;
+         } else if (y < Board.Y_MIN){
+             this.y = Board.Y_MIN;
+         } else { // Incluido el caso en el que no se salga de los bordes
+             this.y = y;
+         }
+
+        bomb = new Bomb(this.x, this.y); // Cambiado x e y por this.x y this.y
 
         var alienImg = "src/main/resources/images/alien.png";
         var ii = new ImageIcon(alienImg);
